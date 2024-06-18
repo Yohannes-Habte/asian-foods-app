@@ -1,0 +1,24 @@
+.small-product-cart-page-loader {
+  left: 50%;
+  top: 50%;
+}
+
+.new-car-text {
+  font-family: "Poetsen One", sans-serif;
+  font-size: 1.8rem;
+  padding: 0 0.4rem;
+}
+
+.show-more-text {
+  background-color: var(--bgLightest);
+  width: 150px;
+  text-align: center;
+  padding: 0.2rem 0.8rem;
+  margin-bottom: 2rem;
+  cursor: pointer;
+  border-radius: 0.4rem;
+
+  &:hover {
+    background-color: var(--brandColor);
+  }
+}

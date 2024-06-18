@@ -1,0 +1,36 @@
+
+.customsettings{
+    background-color: #415a77;
+   
+}
+
+.login-page-container {
+  min-height: 100vh;
+}
+
+.form-container-signup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  width: 60vw;
+  max-width: 500px;
+  margin: auto;
+  background-color: var(--grayMedium);
+  padding: 2rem;
+  border-radius: 0.8rem;
+  margin-top: 2rem;
+  color: var(--textLight);
+
+  input {
+    padding: 0.2rem -2rem 0.2rem 0.8rem;
+  }
+}
+
+@media screen and (max-width: 677px) {
+  
+  .form-container-signup {
+    width: 95vw;
+    margin: auto;
+  }
+}
+

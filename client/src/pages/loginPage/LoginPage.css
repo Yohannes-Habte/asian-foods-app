@@ -1,0 +1,53 @@
+
+
+
+.customcolor{
+    background-color: #415a77;
+}
+
+.customfont{
+    font-family: "Poetsen One", sans-serif;
+}
+
+.sign-up,
+.login-link {
+  color: var(--brandColor);
+  font-weight: 600;
+  padding-left: 0.8rem;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+    color: black;
+  }
+}
+
+.have-no-account,
+.have-account {
+  text-align: center;
+  margin: 1rem auto 30rem;
+}
+
+.form-container-login {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 60vw;
+  max-width: 500px;
+  margin: auto;
+  background-color: var(--grayMedium);
+  padding: 2rem;
+  border-radius: 0.8rem;
+  margin-top: 4rem;
+  color: var(--textLight);
+}
+
+@media screen and (max-width: 677px) {
+  
+  .form-container-login {
+    width: 95vw;
+    margin: auto;
+  }
+}
+
+

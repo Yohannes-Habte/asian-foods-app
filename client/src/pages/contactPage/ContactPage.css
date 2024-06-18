@@ -1,10 +1,8 @@
-
-.customcolor{
-    background-color: #415a77;
-   
+.customcolor {
+  background-color: #415a77;
 }
-.customfont{
-    font-family: "Poetsen One", sans-serif;
+.customfont {
+  font-family: "Poetsen One", sans-serif;
 }
 
 .header-text {
@@ -29,17 +27,14 @@
   margin-bottom: 20rem;
   color: var(--textLight);
 
-  input {
+  /* input {
     padding: 0.2rem -2rem 0.2rem 0.8rem;
-  }
+  } */
 }
 
 @media screen and (max-width: 677px) {
-  
   .form-container {
     width: 95vw;
     margin: auto;
   }
 }
-
-

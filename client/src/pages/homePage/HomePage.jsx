@@ -12,6 +12,7 @@ import NewCars from "../../components/products/landingProducts/NewCars";
 import Services from "../../components/services/Services";
 import { clientProducts } from "../../utils/clientProducts";
 import SearchResultCart from "../../components/products/searchResultCart/SearchResultCart";
+import AddProducts from "../../components/AddProduct/AddProducts";
 
 // Search car brand
 const getBrand = async (brand) => {
@@ -106,6 +107,8 @@ const HomePage = () => {
         ) : (
           <>
             <ProductCarousel data={cardsData} loading={loading} />
+
+            <AddProducts />
 
             <NewCars />
 

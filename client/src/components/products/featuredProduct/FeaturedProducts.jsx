@@ -14,10 +14,8 @@ const FeaturedProductsDetails = () => {
   const [featuredCarInfo, setFeaturedCarInfo] = useState(null);
   const [loading, setLoading] = useState(false);
 
-
-  const status = featuredCarInfo?.fields?.newCar === true? "New Car" : "Used Car"
-
-  
+  const status =
+    featuredCarInfo?.fields?.newCar === true ? "New Car" : "Used Car";
 
   const featuredCarDetails = async () => {
     try {
@@ -84,7 +82,10 @@ const FeaturedProductsDetails = () => {
             </p>
           </div>
           <div className="card-icon flex  items-center gap-1 rounded">
-            <button onClick={() => addToCartHandler(id)} className="text-sm"> Add To Cart </button>
+            <button onClick={() => addToCartHandler(id)} className="text-sm">
+              {" "}
+              Add To Cart{" "}
+            </button>
             <FaCartPlus onClick={() => addToCartHandler(id)} />
           </div>
         </div>
@@ -117,10 +118,7 @@ const FeaturedProductsDetails = () => {
           </p>
         </div>
         <div>
-          <p className="bg-orange-200 py-2 px-1">
-            {" "}
-            Status: {status}
-          </p>
+          <p className="bg-orange-200 py-2 px-1"> Status: {status}</p>
           <p className="bg-orange-300 py-2 px-1">
             {" "}
             Performance: {featuredCarInfo?.fields?.performance}{" "}

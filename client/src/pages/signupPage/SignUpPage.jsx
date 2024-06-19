@@ -20,6 +20,8 @@ const SignUpPage = () => {
 
   const [formData, setFormData] = useState(initialState);
 
+  const { firstName, lastName, email, password } = formData;
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -39,48 +41,19 @@ const SignUpPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const spaceId = import.meta.env.VITE_SPACE_ID;
-    const accessToken = import.meta.env.VITE_MGT_ACCESS_TOKEN;
-    const environmentId = "master";
-    
-    const url = `https://api.contentful.com/spaces/${spaceId}/environments/${environmentId}/entries`;
-    const entryData = {
-      fields: {
-        firstName: {
-          "en-US": formData.firstName,
-        },
-        lastName: {
-          "en-US": formData.lastName,
-        },
-        email: {
-          "en-US": formData.email,
-        },
-        password: {
-          "en-US": formData.password,
-        },
-      },
-    };
     try {
-      dispatch({ type: USER_ACTION.SIGN_UP_START });
-      const { data } = await axios.post(url, entryData, {
-        headers: {
-          "Content-Type": "application/vnd.contentful.management.v1+json",
-          Authorization: `Bearer ${accessToken}`,
-          "X-Contentful-Content-Type": "user",
-        },
-      });
-      dispatch({
-        type: USER_ACTION.SIGN_UP_SUCCESS,
-        payload: data,
-      });
-      localStorage.setItem("userInfo", JSON.stringify(data));
-
-      reset()
+      const newUser = {
+        firstName,
+        lastName,
+        email,
+        password,
+      };
+      const { data } = await axios.post(
+        "http://localhost:9000/api/v1/auth/register",
+        newUser
+      );
     } catch (error) {
-      dispatch({
-        type: USER_ACTION.SIGN_UP_FAIL,
-        payload: toast.error(error.response.data.message),
-      });
+      console.log(error.message);
     }
   };
   return (
@@ -94,7 +67,7 @@ const SignUpPage = () => {
             <input
               type="text"
               name="firstName"
-              value={formData.firstName}
+              value={firstName}
               placeholder="Your first name"
               onChange={handleChange}
               className="border-none p-2 text-black rounded outline-none"
@@ -105,7 +78,7 @@ const SignUpPage = () => {
             <input
               type="text"
               name="lastName"
-              value={formData.lastName}
+              value={lastName}
               placeholder="Your last name"
               onChange={handleChange}
               className="border-none p-2 text-black rounded outline-none"
@@ -116,7 +89,7 @@ const SignUpPage = () => {
             <input
               type="email"
               name="email"
-              value={formData.email}
+              value={email}
               placeholder="Your email address"
               onChange={handleChange}
               className="border-none p-2 text-black rounded outline-none"
@@ -127,7 +100,7 @@ const SignUpPage = () => {
             <input
               type="password"
               name="password"
-              value={formData.password}
+              value={password}
               placeholder="Create your password"
               onChange={handleChange}
               className="border-none p-2 text-black rounded outline-none mb-8"

@@ -7,24 +7,26 @@ import GlobalFunction from "../../utils/GlobalFunction";
 import BigProductCart from "../../components/products/bigProductCart/BigProductCart";
 import FilterForm from "../../components/filterForm/FilterForm";
 import PageLoader from "../../components/loader/PageLoader";
-import UsedCars from "../../components/products/landingProducts/UsedCars";
-import NewCars from "../../components/products/landingProducts/NewCars";
+// import UsedCars from "../../components/products/landingProducts/UsedCars";
+// import NewCars from "../../components/products/landingProducts/NewCars";
 import Services from "../../components/services/Services";
 import { clientProducts } from "../../utils/clientProducts";
 import SearchResultCart from "../../components/products/searchResultCart/SearchResultCart";
 import AddProducts from "../../components/AddProduct/AddProducts";
+import LandingFoods from "../../components/products/landingProducts/LandingFoods";
+import { SpecialFoods } from "../../../../Data/SpecialFoods.js";
 
 // Search car brand
 const getBrand = async (brand) => {
-  try {
-    const getCarsOfBrand = await clientProducts.getEntries({
-      content_type: "cars",
-      "fields.brand": brand,
-    });
-    return getCarsOfBrand.items;
-  } catch (error) {
-    console.error(error.message);
-  }
+  // try {
+  //   const getCarsOfBrand = await clientProducts.getEntries({
+  //     content_type: "cars",
+  //     "fields.brand": brand,
+  //   });
+  //   return getCarsOfBrand.items;
+  // } catch (error) {
+  //   console.error(error.message);
+  // }
 };
 
 const initialState = {
@@ -38,6 +40,14 @@ const initialState = {
 };
 
 const HomePage = () => {
+  const [specialFoods, setSpecialFoods] = useState([]);
+  const getAllSpecialFoods = async () => {
+    try {
+      setSpecialFoods(SpecialFoods);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   const { loading, data, getProducts } = GlobalFunction();
   const { getProducts: getData } = GlobalFunction();
 
@@ -64,14 +74,16 @@ const HomePage = () => {
   };
 
   useEffect(() => {
+    getAllSpecialFoods();
+    console.log(specialFoods);
     getProducts("cars", 6, 0);
 
     return () => {};
   }, []);
 
   // Carousel data
-  const cardsData = data.map((featuredCar) => (
-    <BigProductCart key={featuredCar?.sys.id} data={featuredCar} />
+  const cardsData = specialFoods.map((food) => (
+    <BigProductCart key={food?.id} food={food} />
   ));
 
   return (
@@ -109,10 +121,7 @@ const HomePage = () => {
             <ProductCarousel data={cardsData} loading={loading} />
 
             <AddProducts />
-
-            <NewCars />
-
-            <UsedCars />
+            <LandingFoods />
           </>
         )}
       </section>

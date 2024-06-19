@@ -1,0 +1,61 @@
+.cart-product-container {
+  background-color: var(--bgLightest);
+  padding: 0.8rem;
+  box-shadow: 0px 0px 10px rgba(129, 129, 129, 0.2);
+  border-radius: 0.4rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin-bottom: 3rem;
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 0px 10px rgba(198, 155, 2, 0.5);
+  }
+}
+
+.car-image {
+  height: 260px;
+  display: block;
+  margin-left: auto;
+  width: 100%;
+  border-radius: 0.4rem;
+  object-fit: cover;
+}
+
+.header-smallCard {
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin: 1rem 0 0.8rem 0;
+}
+
+.sub-title-text {
+  font-weight: 600;
+}
+
+.card-icon {
+  cursor: pointer;
+  background-color: var(--brandColor);
+  padding: 0.2rem 0.4rem;
+}
+
+.photo-card-small {
+  height: 260px;
+  display: block;
+  margin-left: auto;
+  width: 100%;
+  border-radius: 0.4rem;
+  object-fit: cover;
+}
+
+@media only screen and (max-width: 800px) {
+  .cardSmall-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media only screen and (max-width: 500px) {
+  .cardSmall-container {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,40 @@
+
+
+.footer-wrapper {
+  background-color: var(--bgDark);
+  color: white;
+  padding: 2rem;
+}
+
+.footer-asides-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 1rem 0 2rem 0;
+}
+
+.copy-wright {
+  background-color: var( --grayDark);
+}
+
+@media screen and (max-width: 677px) {
+  .footer-asides-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .copy-wright {
+    background-color: var( --grayDark);
+    width: 95%;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .footer-asides-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 1rem;
+    margin-bottom: 1rem;
+  }
+}

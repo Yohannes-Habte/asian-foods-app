@@ -1,36 +1,61 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./AllProducts.css";
-import GlobalFunction from "../../../utils/GlobalFunction";
-import PageLoader from "../../loader/PageLoader";
+// import GlobalFunction from "../../../utils/GlobalFunction";
+// import PageLoader from "../../loader/PageLoader";
 import SmallProductCart from "../smallProductCart/SmallProductCart";
+// import axios from "axios";
+import { Foods } from "../../../../../Data/Foods";
 
 const AllProducts = () => {
-  const { loading, data, getProducts } = GlobalFunction();
+  const [foods, setFoods] = useState([]);
+  // const { loading, data, getProducts } = GlobalFunction();
 
-  console.log("all cars data =", data);
+  const getAllFoods = async () => {
+    try {
+      setFoods(Foods);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // console.log("all cars data =", data);
+  // console.log(Foods);
 
   // Display data on browser
   useEffect(() => {
-    getProducts("cars", 12, 0);
+    getAllFoods();
+    console.log(foods);
+
+    // getProducts("cars", 12, 0);
 
     return () => {};
   }, []);
 
   return (
-    <section>
-      {/* <h3>List of Products</h3> */}
-      {loading ? (
-        <div className="small-product-cart-page-loader">
-          <PageLoader />
-        </div>
-      ) : (
-        <div className="small-product-cart-wrapper">
-          {data &&
-            data.length !== 0 &&
-            data.map((car) => <SmallProductCart key={car.sys.id} car={car} />)}
-        </div>
-      )}
-    </section>
+    <>
+      <div className="small-product-cart-wrapper">
+        {foods &&
+          foods.length !== 0 &&
+          foods.map((food) => <SmallProductCart key={food.id} food={food} />)}
+      </div>
+
+      <section>
+        {/* <h3>List of Products</h3>
+        {loading ? (
+          <div className="small-product-cart-page-loader">
+            <PageLoader />
+          </div>
+        ) : (
+          <div className="small-product-cart-wrapper">
+            {foods &&
+              foods.length !== 0 &&
+              foods.map((food) => (
+                <SmallProductCart key={food.id} food={food} />
+              ))}
+          </div>
+        )} */}
+      </section>
+    </>
   );
 };
 

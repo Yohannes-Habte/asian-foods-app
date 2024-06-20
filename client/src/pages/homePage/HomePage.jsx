@@ -12,7 +12,6 @@ import PageLoader from "../../components/loader/PageLoader";
 import Services from "../../components/services/Services";
 import { clientProducts } from "../../utils/clientProducts";
 import SearchResultCart from "../../components/products/searchResultCart/SearchResultCart";
-import AddProducts from "../../components/AddProduct/AddProducts";
 import LandingFoods from "../../components/products/landingProducts/LandingFoods";
 import { SpecialFoods } from "../../../../Data/SpecialFoods.js";
 
@@ -119,8 +118,6 @@ const HomePage = () => {
         ) : (
           <>
             <ProductCarousel data={cardsData} loading={loading} />
-
-            <AddProducts />
             <LandingFoods />
           </>
         )}

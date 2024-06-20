@@ -10,7 +10,7 @@
 }
 
 .show-more-text {
-  background-color: var(--bgLightest);
+  background-color: var(--bgLight);
   width: 150px;
   text-align: center;
   padding: 0.2rem 0.8rem;

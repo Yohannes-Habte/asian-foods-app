@@ -8,9 +8,8 @@
 .header-text {
   font-family: "Poetsen One", sans-serif;
   font-size: 1.8rem;
-  padding: 0 0.4rem;
-  margin: 3rem auto;
   text-align: center;
+  color: var(--textLight);
 }
 
 .form-container {

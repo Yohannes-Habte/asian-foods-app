@@ -1,12 +1,10 @@
-
-.customsettings{
-    background-color: #415a77;
-   
+.customsettings {
+  background-color: var(--grayMedium);
 }
 
-.login-page-container {
-  min-height: 100vh;
-}
+/* .login-page-container {
+  min-height: 40vh;
+} */
 
 .form-container-signup {
   display: flex;
@@ -27,10 +25,8 @@
 }
 
 @media screen and (max-width: 677px) {
-  
   .form-container-signup {
     width: 95vw;
     margin: auto;
   }
 }
-

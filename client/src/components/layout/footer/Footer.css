@@ -1,7 +1,5 @@
-
-
 .footer-wrapper {
-  background-color: var(--bgDark);
+  background-color: var(--brandColorDark);
   color: white;
   padding: 2rem;
 }
@@ -13,10 +11,6 @@
   padding: 1rem 0 2rem 0;
 }
 
-.copy-wright {
-  background-color: var( --grayDark);
-}
-
 @media screen and (max-width: 677px) {
   .footer-asides-wrapper {
     display: flex;
@@ -25,7 +19,7 @@
   }
 
   .copy-wright {
-    background-color: var( --grayDark);
+    background-color: var(--grayDark);
     width: 95%;
   }
 }

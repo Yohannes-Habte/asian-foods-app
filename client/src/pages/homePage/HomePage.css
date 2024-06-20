@@ -1,21 +1,20 @@
-
 .headline-text {
-  color: var(--textDark);
+  color: var(--textLight);
   text-align: center;
   font-family: "Poetsen One", sans-serif;
   font-size: 2.4rem;
-  margin-top: 1.8rem;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
 
-.home-page-container {
-  min-height: 100vh;
-}
+  .home-page-container {
+    min-height: 100vh;
+  }
 
-.home-page-loader {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-
-}
+  .home-page-loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+  }
 }
 
 .filter-result-wrapper {

@@ -9,6 +9,8 @@
   align-items: center;
   color: white;
   padding: 1rem 2rem;
+  width: 80vw;
+  margin: auto;
 }
 
 .logo-header {

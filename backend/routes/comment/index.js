@@ -5,6 +5,7 @@ import {
   getComment,
   getComments,
 } from "../../controllers/commentController/index.js";
+import { authAdmin } from "../../middleware/auth/index.js";
 
 const commentRouter = express.Router();
 

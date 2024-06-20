@@ -45,6 +45,7 @@ export const authUser = async (req, res, next) => {
 export const authAdmin = async (req, res, next) => {
   try {
     const token = req.cookies.user_token;
+  
 
     if (!token) {
       return next(createError(401, "User is not authenticated. Please login!"));
@@ -57,16 +58,19 @@ export const authAdmin = async (req, res, next) => {
       return next(createError(401, "Invalid token. Please login again."));
     }
 
+    console.log("decodedToken=", decodedToken)
+
     let result;
     try {
       result =
         await sql`SELECT * FROM users WHERE user_id = ${decodedToken.id}`;
+
     } catch (error) {
       console.error("Database query error:", error);
       return next(createError(500, "An error occurred during authentication."));
     }
 
-    if (result && result.length > 0 && result[0].isAdmin) {
+    if (result && result.length > 0 && result[0].is_admin) {
       return next();
     } else {
       return next(createError(403, "User is not authorized."));

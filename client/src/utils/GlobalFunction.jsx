@@ -1,27 +1,28 @@
-import { useState } from "react";
-import { clientProducts } from "./clientProducts";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
-const GlobalFunction = () => {
+const GlobalFunction = (url) => {
+  // Global state variables for fetching comments from the backend
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  // Get all food products
-  const getProducts = async (type = type, limit = limit, skip = skip) => {
-    try {
+  // useEffect
+  useEffect(() => {
+    const fetchData = async () => {
       setLoading(true);
-      const data = await clientProducts.getEntries({
-        content_type: type,
-        limit: limit,
-        skip: skip,
-      });
-      setData(data.items);
+      try {
+        const { data } = await axios.get(url);
+        setData(data);
+      } catch (err) {
+        setError(toast.error());
+      }
       setLoading(false);
-    } catch (error) {
-      console.log(error.message);
-      setLoading(false);
-    }
-  };
-  return { loading, data, getProducts };
+    };
+    fetchData();
+  }, [url]);
+  return { data, loading, error };
 };
 
 export default GlobalFunction;

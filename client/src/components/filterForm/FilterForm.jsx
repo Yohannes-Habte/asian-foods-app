@@ -2,21 +2,8 @@ import { toast } from "react-toastify";
 import "./FilterForm.css";
 import { useEffect } from "react";
 
-const FilterForm = ({
-  data,
-  getData,
-  filters,
-  updateChange,
-  getname,
-  reset,
-  setnames,
-}) => {
+const FilterForm = ({ filters, updateChange, getname, reset, setnames }) => {
   const { name, spicy, country, price } = filters;
-  useEffect(() => {
-    getData("cars", 45, 0);
-
-    return () => {};
-  }, []);
 
   // Handle search
   const handleSearch = (e) => {

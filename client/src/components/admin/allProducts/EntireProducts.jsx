@@ -1,13 +1,36 @@
+import axios from "axios";
 import "./EntireProducts.scss";
+import { useEffect, useState } from "react";
 
 const EntireProducts = () => {
-  
+  // Local state variable
+
+  const [loading, setLoading] = useState(false);
+  const [foods, setFoods] = useState([]);
+
+  const getAllSpecialFoods = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.get(`http://localhost:9000/api/v1/foods`);
+      setFoods(data.foods);
+      setLoading(false);
+    } catch (error) {
+      console.log(error.message);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getAllSpecialFoods();
+
+    return () => {};
+  }, []);
+
   return (
     <section>
       <h2> List of Products </h2>
 
       <table className="product-table">
-   
         <thead className="table-head">
           <tr className="head-tr">
             <th className="head-cell"> Product ID</th>
@@ -19,30 +42,21 @@ const EntireProducts = () => {
           </tr>
         </thead>
         <tbody>
-          <tr className="body-tr">
-            <td className="body-cell">1</td>
-            <td className="body-cell">Grill</td>
-            <td className="body-cell">Image</td>
-            <td className="body-cell">$35</td>
-            <td className="body-cell"> Outstanding product</td>
-            <td className="body-cell">delete | Edit </td>
-          </tr>
-          <tr className="body-tr">
-            <td className="body-cell">1</td>
-            <td className="body-cell">Grill</td>
-            <td className="body-cell">Image</td>
-            <td className="body-cell">$35</td>
-            <td className="body-cell"> Outstanding product</td>
-            <td className="body-cell">delete | Edit </td>
-          </tr>
-          <tr className="body-tr">
-            <td className="body-cell">1</td>
-            <td className="body-cell">Grill</td>
-            <td className="body-cell">Image</td>
-            <td className="body-cell">$35</td>
-            <td className="body-cell"> Outstanding product</td>
-            <td className="body-cell">delete | Edit </td>
-          </tr>
+          {foods &&
+            foods.map((food) => {
+              return (
+                <tr key={food.food_id} className="body-tr">
+                  <td className="body-cell"> {food.food_id} </td>
+                  <td className="body-cell"> {food.food_name} </td>
+                  <td className="body-cell">
+                    <img src={food.image} alt="" className="image" />
+                  </td>
+                  <td className="body-cell"> {food.food_price} </td>
+                  <td className="body-cell"> {food.description.slice(0, 70).concat(" ...")}</td>
+                  <td className="body-cell">delete | Edit </td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </section>

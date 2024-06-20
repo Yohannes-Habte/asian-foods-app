@@ -4,20 +4,27 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 // import PageLoader from "../../loader/PageLoader";
 import { FaCartPlus } from "react-icons/fa";
+import axios from "axios";
 // import { CartContext } from "../../../context/cart/CartProvider";
 // import { toast } from "react-toastify";
 // import { CART_ACTION } from "../../../context/cart/CartReducer";
-import { SpecialFoods } from "../../../../../Data/SpecialFoods.js";
 
 const FeaturedProductsDetails = () => {
   const { id } = useParams();
   const [food, setFood] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const getSingleFood = async () => {
     try {
-      setFood(SpecialFoods[id - 1]);
+      setLoading(true);
+      const { data } = await axios.get(
+        `http://localhost:9000/api/v1/foods/${id}`
+      );
+      setFood(data.food);
+      setLoading(false);
     } catch (error) {
       console.log(error.message);
+      setLoading(false);
     }
   };
   useEffect(() => {

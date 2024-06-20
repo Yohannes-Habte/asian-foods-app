@@ -1,13 +1,28 @@
 import "./LandingPageProducts.css";
-import { Foods } from "../../../../../Data/Foods";
 import SmallProductCart from "../smallProductCart/SmallProductCart";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 const LandingFoods = () => {
   const [foods, setFoods] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const fetchFoods = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.get(`http://localhost:9000/api/v1/foods`);
+      setFoods(data.foods);
+      setLoading(false);
+    } catch (error) {
+      console.log(error.message);
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    setFoods(Foods);
+    fetchFoods();
   }, []);
+
   return (
     <section>
       {" "}
@@ -17,7 +32,9 @@ const LandingFoods = () => {
       </div>{" "}
       <div className="small-product-cart-wrapper">
         {foods &&
-          foods.map((food) => <SmallProductCart key={food.id} food={food} />)}
+          foods.map((food) => (
+            <SmallProductCart key={food.food_id} food={food} />
+          ))}
       </div>
     </section>
   );

@@ -23,7 +23,7 @@ const BigProductCart = ({ food }) => {
   //   console.log(specialFoods);
   // }, []);
 
-  const { id, name, description, price, image, spicy } = food;
+  const { food_id, name, description, price, image, spicy } = food;
 
   // const {
   //   fields: { brand, catagory, description, model, newCar, price, image },
@@ -66,7 +66,7 @@ const BigProductCart = ({ food }) => {
 
           <div className="bigCard-content-bottom flex items-center justify-between mt-6">
             <div className="btn-bigCard">
-              <Link to={`products/featured/${id}`}>
+              <Link to={`products/featured/${food_id}`}>
                 <button>Details</button>
               </Link>
             </div>

@@ -27,39 +27,34 @@ const initialState = {
 };
 
 const HomePage = () => {
-  const { data, loading, error } = GlobalFunction(
-    "http://localhost:9000/api/vi/foods"
-  );
-  console.log("data from global function:", data);
+  // Local state variable
+  const [filters, setFilters] = useState(initialState);
+  const [loading, setLoading] = useState(false);
+  const [brands, setBrands] = useState([]);
   const [specialFoods, setSpecialFoods] = useState([]);
+
+  // Reset state variable
+  const reset = () => {
+    setFilters({
+      name: "",
+      price: "",
+      spicelevel: "",
+      conutry: "",
+    });
+  };
 
   const getAllSpecialFoods = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:9000/api/vi/foods`);
-      setSpecialFoods(data);
+      setLoading(true);
+      const { data } = await axios.get(`http://localhost:9000/api/v1/foods`);
+      setSpecialFoods(data.foods);
+      setLoading(false);
+      reset();
     } catch (error) {
       console.log(error.message);
+      setLoading(false);
     }
   };
-
-  // Local state variable
-  const [filters, setFilters] = useState(initialState);
-  const [brands, setBrands] = useState([]);
-
-  const updateChange = (e) => {
-    const { name, value } = e.target;
-    setFilters({ ...filters, [name]: value });
-  };
-
-  // // Reset state variable
-  // const reset = () => {
-  //   setFilters({
-  //     name: "",
-  //     price: "",
-  //     spicelevel: "",
-  //     conutry: "",
-  //   });
-  // };
 
   useEffect(() => {
     getAllSpecialFoods();
@@ -67,9 +62,14 @@ const HomePage = () => {
     return () => {};
   }, []);
 
+  const updateChange = (e) => {
+    const { name, value } = e.target;
+    setFilters({ ...filters, [name]: value });
+  };
+
   // Carousel data
-  const cardsData = specialFoods?.map((food) => (
-    <BigProductCart key={food?.id} food={food} />
+  const cardsData = specialFoods.map((food) => (
+    <BigProductCart key={food.food_id} food={food} />
   ));
 
   return (

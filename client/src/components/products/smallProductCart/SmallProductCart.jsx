@@ -8,7 +8,7 @@ import "./SmallProductCart.css";
 import { FaCartPlus } from "react-icons/fa";
 
 const SmallProductCart = ({ food }) => {
-  console.log(food.name);
+  console.log("food:", food)
   // const { cartItems, dispatch } = useContext(CartContext);
 
   // Add to cart
@@ -29,7 +29,7 @@ const SmallProductCart = ({ food }) => {
   //   }
   // };
 
-  const { id, name, description, price, country, spicy, image } = food;
+  const { food_id, name, description, price, country, spicy, image } = food;
   // const {
   //   fields: { brand, description, model, price, year, image },
   //   sys: { id },
@@ -42,7 +42,7 @@ const SmallProductCart = ({ food }) => {
   return (
     <>
       <section className="cart-product-container">
-        <Link to={`/products/${id}`}>
+        <Link to={`/products/${food_id}`}>
           <figure>
             <img className="car-image" src={image} alt={name} />
           </figure>
@@ -54,7 +54,7 @@ const SmallProductCart = ({ food }) => {
             {description} <span className="text-red-500">read more</span>{" "}
           </p>
         </Link>
-        <div className="flex justify-between mt-6" key={id}>
+        <div className="flex justify-between mt-6" key={food_id}>
           <p className="bg-gray-200 py-1 px-2 rounded"> Price: ${price} </p>
           <Link>
             <div className="p-2 bg-cyan-200">

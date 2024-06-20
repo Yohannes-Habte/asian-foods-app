@@ -8,8 +8,9 @@ import SignUpPage from "./pages/signupPage/SignUpPage";
 import ErrorPage from "./pages/errorPage/ErrorPage";
 import FeaturedProductPage from "./pages/featuredProductPage/FeaturedProductPage";
 import CartPage from "./pages/cartPage/CartPage";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import AdminPage from "./pages/adminPage/AdminPage";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           path="/products/featured/:id"
           element={<FeaturedProductPage />}
         />
+        <Route path="/admin" element={<AdminPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/login" element={<LoginPage />} />
@@ -30,18 +32,18 @@ const App = () => {
       </Routes>
 
       <ToastContainer
-          position="top-right"
-          limit={1}
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
+        position="top-right"
+        limit={1}
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };

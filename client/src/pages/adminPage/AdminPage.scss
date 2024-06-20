@@ -1,0 +1,17 @@
+.admin-page {
+  .admin-page-container {
+    min-height: 100vh;
+
+    .admin-page-title {
+      text-align: center;
+      font-size: 2rem;
+      background-color: #a8dadc;
+    }
+
+    .admin-sidebar-and-main-wrapper {
+      display: grid;
+      grid-template-columns: 15% 80%;
+      column-gap: 1rem;
+    }
+  }
+}

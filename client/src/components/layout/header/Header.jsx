@@ -3,7 +3,8 @@ import "./Header.css";
 import { useContext, useState } from "react";
 import { CartContext } from "../../../context/cart/CartProvider";
 import { UserContext } from "../../../context/user/UserProvider";
-import { FaShoppingCart, FaCar, FaUserCircle, FaBars } from "react-icons/fa";
+import { FaShoppingCart, FaUserCircle, FaBars } from "react-icons/fa";
+import { PiBowlFoodFill } from "react-icons/pi";
 import { MdClose } from "react-icons/md";
 
 const Header = () => {
@@ -26,8 +27,7 @@ const Header = () => {
       <div className="header-wrapper">
         <Link to="/">
           <div className="logo-header flex gap-2 items-center sm:justify-center md:justify-start">
-            <FaCar />
-            <div className="logo-header">myCar</div>
+            <PiBowlFoodFill /> <div className="logo-header">myFood</div>
           </div>
         </Link>
         <nav className="navbar-wrapper flex space-x-10 sm:justify-center md:justify-end">

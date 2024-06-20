@@ -9,7 +9,7 @@ const ProductPage = () => {
       <Header />
 
       <section>
-        <h1 className="product-detail-text"> Product Details </h1>
+        <h1 className="product-detail-text text-white"> Food Details </h1>
         <ProductDetails />
       </section>
 

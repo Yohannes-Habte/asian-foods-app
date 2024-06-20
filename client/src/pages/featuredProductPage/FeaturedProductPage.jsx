@@ -8,8 +8,8 @@ const FeaturedProductPage = () => {
     <main>
       <Header />
       <section className="feturedCar-details-container">
-        <h1 className="featured-card-title">
-          Featured Car Detail Information{" "}
+        <h1 className="featured-card-title text-white">
+          Special Detail Information{" "}
         </h1>
 
         <FeaturedProductsDetails />

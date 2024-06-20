@@ -3,7 +3,7 @@ import "./HomePage.css";
 import ProductCarousel from "../../components/carousel/ProductCarousel";
 import Footer from "../../components/layout/footer/Footer";
 import Header from "../../components/layout/header/Header";
-import GlobalFunction from "../../utils/GlobalFunction";
+// import GlobalFunction from "../../utils/GlobalFunction";
 import BigProductCart from "../../components/products/bigProductCart/BigProductCart";
 import FilterForm from "../../components/filterForm/FilterForm";
 import PageLoader from "../../components/loader/PageLoader";
@@ -13,8 +13,9 @@ import Services from "../../components/services/Services";
 // import { clientProducts } from "../../utils/clientProducts";
 import SearchResultCart from "../../components/products/searchResultCart/SearchResultCart";
 import LandingFoods from "../../components/products/landingProducts/LandingFoods";
-import { SpecialFoods } from "../../../../Data/SpecialFoods.js";
-
+// import { SpecialFoods } from "../../../../Data/SpecialFoods.js";
+import GlobalFunction from "../../utils/GlobalFunction";
+import axios from "axios";
 // Search car brand
 const getBrand = async (brand) => {};
 
@@ -26,11 +27,16 @@ const initialState = {
 };
 
 const HomePage = () => {
-  const { data, loading, error } = GlobalFunction("http://localhost:9000/");
+  const { data, loading, error } = GlobalFunction(
+    "http://localhost:9000/api/vi/foods"
+  );
+  console.log("data from global function:", data);
   const [specialFoods, setSpecialFoods] = useState([]);
+
   const getAllSpecialFoods = async () => {
     try {
-      setSpecialFoods(SpecialFoods);
+      const { data } = await axios.get(`http://localhost:9000/api/vi/foods`);
+      setSpecialFoods(data);
     } catch (error) {
       console.log(error.message);
     }
@@ -62,7 +68,7 @@ const HomePage = () => {
   }, []);
 
   // Carousel data
-  const cardsData = specialFoods.map((food) => (
+  const cardsData = specialFoods?.map((food) => (
     <BigProductCart key={food?.id} food={food} />
   ));
 

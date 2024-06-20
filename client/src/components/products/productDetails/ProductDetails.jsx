@@ -1,34 +1,41 @@
 import { useEffect, useState } from "react";
 import "./ProductDetails.css";
 import { useParams } from "react-router-dom";
-import { clientProducts } from "../../../utils/clientProducts";
 import PageLoader from "../../loader/PageLoader";
 import { FaCartPlus } from "react-icons/fa";
 // import { CartContext } from "../../../context/cart/CartProvider";
 // import { CART_ACTION } from "../../../context/cart/CartReducer";
 import { toast } from "react-toastify";
 import { Foods } from "../../../../../Data/Foods.js";
+import axios from "axios";
 
 const ProductDetails = () => {
   const { id } = useParams();
+  console.log("id:", id);
   const [food, setFood] = useState(null);
-  // console.log(Foods[id]);
+  const [loading, setLoading] = useState(false);
 
   // Global variables
   // const { cartItems, dispatch } = useContext(CartContext);
 
   // Local variables
   // const [carInfo, setCarInfo] = useState(null);
-  // const [loading, setLoading] = useState(false);
+  //
 
   // const status = carInfo?.fields?.newCar === true ? "New Car" : "Used Car";
 
   // Fetch single product
   const getSingleFood = async () => {
     try {
-      setFood(Foods[id - 1]);
+      setLoading(true);
+      const { data } = await axios.get(
+        `http://localhost:9000/api/v1/foods/${id}`
+      );
+      setFood(data.food);
+      setLoading(false);
     } catch (error) {
       console.log(error.message);
+      setLoading(false);
     }
   };
   useEffect(() => {

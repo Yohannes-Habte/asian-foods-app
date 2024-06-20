@@ -11,6 +11,8 @@ const Header = () => {
   const { cartItems } = useContext(CartContext);
   const { user } = useContext(UserContext);
 
+  const isAdmin = true;
+
   // Local state variables
   const [openNavbar, setOpenNavbar] = useState(false);
 
@@ -48,6 +50,14 @@ const Header = () => {
                 Products{" "}
               </NavLink>{" "}
             </li>
+
+            {isAdmin && (
+              <li>
+                <NavLink className={navLinkStyles} to="/admin">
+                  Admin
+                </NavLink>
+              </li>
+            )}
             <li>
               <NavLink className={navLinkStyles} to="/contact">
                 {" "}

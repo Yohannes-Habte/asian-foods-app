@@ -1,7 +1,7 @@
-import "./AddProducts.css";
 import { useState } from "react";
+import "./AddProduct.css";
 
-const AddProducts = () => {
+const AddProduct = () => {
   const [formData, setFormData] = useState({
     name: "",
     price: "",
@@ -23,7 +23,7 @@ const AddProducts = () => {
   };
 
   return (
-    <div>
+    <section>
       <h4 className="new-car-text text-center my-10">Add your product</h4>
       <form onSubmit={handleSubmit} className="form-container-add">
         <div className="flex flex-col gap-1">
@@ -115,8 +115,8 @@ const AddProducts = () => {
           Save product
         </button>
       </form>
-    </div>
+    </section>
   );
 };
 
-export default AddProducts;
+export default AddProduct;

@@ -16,29 +16,17 @@ import LandingFoods from "../../components/products/landingProducts/LandingFoods
 import { SpecialFoods } from "../../../../Data/SpecialFoods.js";
 
 // Search car brand
-const getBrand = async (brand) => {
-  // try {
-  //   const getCarsOfBrand = await clientProducts.getEntries({
-  //     content_type: "cars",
-  //     "fields.brand": brand,
-  //   });
-  //   return getCarsOfBrand.items;
-  // } catch (error) {
-  //   console.error(error.message);
-  // }
-};
+const getBrand = async (brand) => {};
 
 const initialState = {
-  brand: "",
-  power: "",
-  year: "",
-  color: "",
+  name: "",
   price: "",
-  fuel: "",
-  brands: "",
+  spicelevel: "",
+  conutry: "",
 };
 
 const HomePage = () => {
+  const { data, loading, error } = GlobalFunction("http://localhost:9000/");
   const [specialFoods, setSpecialFoods] = useState([]);
   const getAllSpecialFoods = async () => {
     try {
@@ -47,8 +35,6 @@ const HomePage = () => {
       console.log(error.message);
     }
   };
-  const { loading, data, getProducts } = GlobalFunction();
-  const { getProducts: getData } = GlobalFunction();
 
   // Local state variable
   const [filters, setFilters] = useState(initialState);
@@ -59,23 +45,18 @@ const HomePage = () => {
     setFilters({ ...filters, [name]: value });
   };
 
-  // Reset state variable
-  const reset = () => {
-    setFilters({
-      brand: "",
-      power: "",
-      year: "",
-      color: "",
-      price: "",
-      fuel: "",
-      brands: "",
-    });
-  };
+  // // Reset state variable
+  // const reset = () => {
+  //   setFilters({
+  //     name: "",
+  //     price: "",
+  //     spicelevel: "",
+  //     conutry: "",
+  //   });
+  // };
 
   useEffect(() => {
     getAllSpecialFoods();
-    console.log(specialFoods);
-    getProducts("cars", 6, 0);
 
     return () => {};
   }, []);
@@ -91,17 +72,12 @@ const HomePage = () => {
 
       <section className="container mx-auto">
         <FilterForm
-          getData={getData}
-          data={data}
           filters={filters}
           setFilters={setFilters}
           updateChange={updateChange}
-          reset={reset}
-          brands={brands}
-          setBrands={setBrands}
-          getBrand={getBrand}
+          // reset={reset}
         />
-        <h1 className="headline-text"> We provide your food !</h1>
+        <h1 className="headline-text"> Today's special food!</h1>
 
         <div className="filter-result-wrapper">
           {brands &&

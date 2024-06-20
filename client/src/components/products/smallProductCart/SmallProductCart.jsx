@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./SmallProductCart.css";
 // import { useContext } from "react";
 // import { CartContext } from "../../../context/cart/CartProvider";
@@ -42,25 +42,25 @@ const SmallProductCart = ({ food }) => {
   return (
     <>
       <section className="cart-product-container">
-        {/* <Link to={`/products/${id}`}> */}
-        <figure>
-          <img className="car-image" src={image} alt={name} />
-        </figure>
-        <h3 className="header-smallCard"> {name} </h3>
-        <p className="sub-title-text"> {country} </p>
-        <p> Spicy level: {spicy} </p>
-        <p>
-          {" "}
-          {description} <span className="text-red-500">read more</span>{" "}
-        </p>
-        {/* </Link> */}
+        <Link to={`/products/${id}`}>
+          <figure>
+            <img className="car-image" src={image} alt={name} />
+          </figure>
+          <h3 className="header-smallCard"> {name} </h3>
+          <p className="sub-title-text"> {country} </p>
+          <p> Spicy level: {spicy} </p>
+          <p>
+            {" "}
+            {description} <span className="text-red-500">read more</span>{" "}
+          </p>
+        </Link>
         <div className="flex justify-between mt-6" key={id}>
           <p className="bg-gray-200 py-1 px-2 rounded"> Price: ${price} </p>
-          {/* <Link> */}
-          <div className="card-icon">
-            <FaCartPlus />
-          </div>
-          {/* </Link> */}
+          <Link>
+            <div className="p-2 bg-cyan-200">
+              <FaCartPlus />
+            </div>
+          </Link>
         </div>
       </section>
       {/* <section className="cart-product-container">

@@ -6,9 +6,8 @@ import { useState } from "react";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
-    userName: "",
     email: "",
-    message: "",
+    comment: "",
   });
 
   const handleChange = (e) => {
@@ -21,39 +20,18 @@ const ContactPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const spaceId = import.meta.env.VITE_SPACE_ID;
-    const accessToken = import.meta.env.VITE_COMMENT_MGT_ACCESS_TOKEN;
-    const environmentId = "master";
-
-    const url = `https://api.contentful.com/spaces/${spaceId}/environments/${environmentId}/entries`;
-
-    const entryData = {
-      fields: {
-        userName: {
-          "en-US": formData.userName,
-        },
-        email: {
-          "en-US": formData.email,
-        },
-        message: {
-          "en-US": formData.message,
-        },
-      },
+    const newComment = {
+      email: formData.email,
+      comment: formData.comment,
     };
-
     try {
-      const { data } = await axios.post(url, entryData, {
-        headers: {
-          "Content-Type": "application/vnd.contentful.management.v1+json",
-          Authorization: `Bearer ${accessToken}`,
-          "X-Contentful-Content-Type": "comment",
-        },
-      });
-
-      console.log("Comment", data);
-      localStorage.setItem("comments", JSON.stringify(data));
+      // eslint-disable-next-line no-unused-vars
+      const { data } = await axios.post(
+        "http://localhost:9000/api/v1/comments/new",
+        newComment
+      );
     } catch (error) {
-      console.log(error);
+      console.log(error.comment);
     }
   };
 
@@ -61,25 +39,13 @@ const ContactPage = () => {
     <main>
       <Header />
       <section className="mb-20">
-        <h1 className="header-text"> Didn't find the right car?</h1>
-        <p className="text-center">
-          Simply write to us with the desired model and car name, we will
-          provide your desired car !
+        <h1 className="header-text mt-12"> Did not find the right food?</h1>
+        <p className="text-center mt-3 w-2/3 mx-auto text-white">
+          Simply write to us with the desired food and spicy level, we will
+          provide your desired food !
         </p>
 
         <form onSubmit={handleSubmit} className="form-container">
-          <div className="flex flex-col gap-1">
-            <label>Full Name</label>
-            <input
-              type="text"
-              name="userName"
-              value={formData.userName}
-              placeholder="Your full name"
-              onChange={handleChange}
-              className="border-none p-2 text-black rounded outline-none"
-            />
-          </div>
-
           <div className="flex flex-col gap-1">
             <label>Email Address </label>
             <input
@@ -93,14 +59,14 @@ const ContactPage = () => {
           </div>
 
           <div className="flex flex-col gap-1">
-            <label htmlFor="message">Text Message </label>
+            <label htmlFor="comment">Text comment </label>
             <textarea
-              name="message"
-              id="message"
+              name="comment"
+              id="comment"
               rows="6"
               cols="50"
-              value={formData.message}
-              placeholder="Your message"
+              value={formData.comment}
+              placeholder="Your comment"
               onChange={handleChange}
               className="border-none mb-8 p-2 text-black rounded outline-none"
             ></textarea>
@@ -108,9 +74,9 @@ const ContactPage = () => {
 
           <button
             type="submit"
-            className="bg-orange-500 py-2 rounded-3xl hover:bg-orange-400 text-semibold"
+            className="bg-cyan-600 py-2 rounded-3xl hover:bg-orange-400 text-semibold"
           >
-            Send your message
+            Send your comment
           </button>
         </form>
       </section>

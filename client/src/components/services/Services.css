@@ -1,5 +1,5 @@
 .service-container {
-  background-color: var(--grayDark);
+  background-color: var(--bgMedium);
   padding: 2rem;
   color: var(--textLight);
   margin-top: 6rem;
@@ -10,11 +10,11 @@
   font-family: "Poetsen One", sans-serif;
   font-size: 2rem;
   margin-bottom: 0.8rem;
-  color: var(--brandColor);
+  color: var(--textLight);
 }
 
 .service-img {
-  max-width: 900px;
+  max-width: 700px;
   margin: auto;
   border-radius: 0.8rem;
 }
@@ -36,6 +36,4 @@
     margin: auto;
     border-radius: 0.8rem;
   }
-  
 }
-

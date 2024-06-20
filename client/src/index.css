@@ -12,10 +12,10 @@
   --bgLightest: #f4f4f4;
   --textDark: #0f0f0f;
   --textLight: #f4f4f4;
-  --brandColor: #fca311;
-  --brandColorDark: #ab5c01;
+  --brandColor: #17bbd7;
+  --brandColorDark: #0d808a;
   --brandColorLightest: #fffaf1;
-  --brandColorLight: #f1bc67;
+  --brandColorLight: #bdeded;
   --SuccessColor: #38b000;
   --warningColor: #00b4d8;
   --errorColor: #d90429;
@@ -29,5 +29,5 @@
 }
 
 body {
-  background-color: var(--brandColorLightest);
+  background-color: var(--grayDark);
 }

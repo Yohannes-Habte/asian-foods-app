@@ -19,7 +19,7 @@
   max-width: 1200px;
   border-radius: 0.4rem 0 0 0;
   margin-top: 1rem;
-  box-shadow: 2px 2px 10px rgba(253, 242, 195, 0.908);
+  box-shadow: 2px 2px 10px rgba(0, 19, 56, 0.3);
   display: grid;
   grid-template-columns: 1fr 1fr;
 }

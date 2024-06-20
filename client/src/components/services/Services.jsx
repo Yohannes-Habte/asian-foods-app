@@ -3,7 +3,7 @@ import "./Services.css";
 const Services = () => {
   return (
     <section className="service-container">
-      <h3 className="service-head-text pb-8">Our services</h3>
+      <h3 className="service-head-text pb-8">Our Offers</h3>
 
       <div className="service-img">
         <img src=".././img4.jpg" alt="image" className="rounded-lg" />

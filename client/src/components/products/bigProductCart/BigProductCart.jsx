@@ -57,32 +57,30 @@ const BigProductCart = ({ food }) => {
   return (
     <>
       <section className="bigCard-container">
-        <div className="small-product-cart-wrapper">
-          <div className="flex flex-col p-4 justify-between">
-            <div className="card-content">
-              <header className="header-bigCard"> {name}</header>
-              <h3 className="font-semibold mb-2">Spicy level: {spicy}</h3>
-              <p className="card-content-para line-clamp-3"> {description}</p>
-            </div>
+        <div className="flex flex-col p-4 justify-between">
+          <div className="card-content">
+            <header className="header-bigCard"> {name}</header>
+            <h3 className="font-semibold mb-2">Spicy level: {spicy}</h3>
+            <p className="card-content-para line-clamp-3"> {description}</p>
+          </div>
 
-            <div className="bigCard-content-bottom flex items-center justify-between mt-6">
-              <div className="btn-bigCard">
-                <Link to={`products/featured/${id}`}>
-                  <button>Details</button>
-                </Link>
+          <div className="bigCard-content-bottom flex items-center justify-between mt-6">
+            <div className="btn-bigCard">
+              <Link to={`products/featured/${id}`}>
+                <button>Details</button>
+              </Link>
+            </div>
+            <div className="bottom-right">
+              <div className="bg-gray-800 py-1 px-4 rounded text-white">
+                <p>${price}</p>
               </div>
-              <div className="bottom-right">
-                <div className="bg-gray-800 py-1 px-4 rounded text-white">
-                  <p>${price}</p>
-                </div>
-                <div className="card-icon">
-                  <FaCartPlus />
-                </div>
+              <div className="card-icon">
+                <FaCartPlus />
               </div>
             </div>
-            <img src={image} alt={name} className="photo-card-big" />
           </div>
         </div>
+        <img src={image} alt={name} className="photo-card-big" />
       </section>
       <section className="bigCard-container">
         {/* <div className="flex flex-col p-4 justify-between">

@@ -10,7 +10,7 @@ import PageLoader from "../../components/loader/PageLoader";
 // import UsedCars from "../../components/products/landingProducts/UsedCars";
 // import NewCars from "../../components/products/landingProducts/NewCars";
 import Services from "../../components/services/Services";
-import { clientProducts } from "../../utils/clientProducts";
+// import { clientProducts } from "../../utils/clientProducts";
 import SearchResultCart from "../../components/products/searchResultCart/SearchResultCart";
 import LandingFoods from "../../components/products/landingProducts/LandingFoods";
 import { SpecialFoods } from "../../../../Data/SpecialFoods.js";
@@ -90,8 +90,6 @@ const HomePage = () => {
       <Header />
 
       <section className="container mx-auto">
-        <h1 className="headline-text"> We sell your dream car !</h1>
-
         <FilterForm
           getData={getData}
           data={data}
@@ -103,6 +101,7 @@ const HomePage = () => {
           setBrands={setBrands}
           getBrand={getBrand}
         />
+        <h1 className="headline-text"> We provide your food !</h1>
 
         <div className="filter-result-wrapper">
           {brands &&

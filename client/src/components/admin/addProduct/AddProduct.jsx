@@ -63,7 +63,7 @@ const AddProduct = () => {
       <h4 className="new-car-text text-center my-10 text-white">
         Add your product
       </h4>
-      <form onSubmit={handleSubmit} className="form-container-add">
+      <form onSubmit={handleSubmit} className="form-container-add bg-cyan-900">
         <div className="flex flex-col gap-1">
           <label>Product name</label>
           <input

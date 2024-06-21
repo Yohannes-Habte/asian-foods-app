@@ -1,13 +1,8 @@
 import "./FeaturedProducts.css";
 import { useContext, useEffect, useState } from "react";
-// import { clientProducts } from "../../../utils/clientProducts";
 import { useParams } from "react-router-dom";
-// import PageLoader from "../../loader/PageLoader";
 import { FaCartPlus } from "react-icons/fa";
 import axios from "axios";
-// import { CartContext } from "../../../context/cart/CartProvider";
-// import { toast } from "react-toastify";
-// import { CART_ACTION } from "../../../context/cart/CartReducer";
 
 const FeaturedProductsDetails = () => {
   const { id } = useParams();
@@ -32,50 +27,6 @@ const FeaturedProductsDetails = () => {
   }, []);
   console.log(food);
 
-  // const [featuredCarInfo, setFeaturedCarInfo] = useState(null);
-  // const [loading, setLoading] = useState(false);
-
-  // const status =
-  //   featuredCarInfo?.fields?.newCar === true ? "New Car" : "Used Car";
-
-  // const featuredCarDetails = async () => {
-  //   try {
-  //     setLoading(true);
-  //     const data = await clientProducts.getEntry(id);
-  //     setFeaturedCarInfo(data);
-  //     setLoading(false);
-  //   } catch (error) {
-  //     console.log(error.message);
-  //     setLoading(false);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   featuredCarDetails();
-
-  //   return () => {};
-  // }, []);
-
-  // const { cartItems, dispatch } = useContext(CartContext);
-
-  // Add to cart
-  // const addToCartHandler = async (id) => {
-  //   const existingItem = cartItems.find((item) => item.sys.id === id);
-
-  //   const quantity = existingItem ? existingItem.quantity + 1 : 1;
-
-  //   if (existingItem) {
-  //     toast.warning("Item exist in the cart!");
-  //   } else {
-  //     dispatch({
-  //       type: CART_ACTION.ADD_ITEM_TO_CART,
-  //       payload: { ...featuredCarInfo, quantity },
-  //     });
-
-  //     toast.success("Item added to cart successfully!");
-  //   }
-  // };
-
   return (
     <>
       <section className="singleCar-details-container">
@@ -83,22 +34,25 @@ const FeaturedProductsDetails = () => {
           <img
             className="single-page-car-image"
             src={food?.image}
-            alt={food?.name}
+            alt={food?.food_name}
           />
         </figure>
-        <div className="bg-cyan-100">
+        <div className="bg-cyan-100 px-4">
           <div className=" flex items-center justify-between mt-6 bg-cyan-200 px-1 py-2 rounded">
             <div>
-              <h3 className="header-singleproduct-detail"> {food?.name} </h3>
+              <h3 className="header-singleproduct-detail">
+                {" "}
+                {food?.food_name}{" "}
+              </h3>
             </div>
             <div className="flex gap-2">
               <div>
-                <p className="bg-gray-200 py-2 px-2 rounded font-bold">
+                <p className="bg-orange-200 py-2 px-2 rounded font-bold">
                   {" "}
-                  Price: ${food?.price}{" "}
+                  Price: ${food?.food_price}{" "}
                 </p>
               </div>
-              <div className="flex  items-center gap-1 rounded bg-cyan-300 px-2">
+              <div className="flex  items-center gap-1 rounded bg-cyan-400 px-2">
                 <button className="text-sm"> Add To Cart </button>
                 <FaCartPlus />
               </div>
@@ -111,12 +65,16 @@ const FeaturedProductsDetails = () => {
           <h3 className="font-semibold mt-6 px-2">Specificattion:</h3>
           <section className=" px-1 py-2 rounded grid gap-2 grid-cols-2 mb-60">
             <div>
-              <p className="bg-cyan-50 py-2 px-1 mb-1">Name: {food?.name}</p>
+              <p className="bg-cyan-50 py-2 px-1 mb-1">
+                Name: {food?.food_name}
+              </p>
               <p className="bg-cyan-50 py-2 px-1">Countrs: {food?.country}</p>
             </div>
             <div>
-              <p className="bg-cyan-50 py-2 px-1 mb-1">Price: ${food?.price}</p>
-              <p className="bg-cyan-50 py-2 px-1"> Spicy: {food?.spicy}</p>
+              <p className="bg-cyan-50 py-2 px-1 mb-1">
+                Price: ${food?.food_price}
+              </p>
+              <p className="bg-cyan-50 py-2 px-1"> Spicy: {food?.spicelevel}</p>
             </div>
           </section>
         </div>

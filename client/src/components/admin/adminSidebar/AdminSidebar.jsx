@@ -1,6 +1,38 @@
+import { useContext } from "react";
 import "./AdminSidebar.scss";
+import { UserContext } from "../../../context/user/UserProvider";
+import { USER_ACTION } from "../../../context/user/UserReducer";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const AdminSidebar = ({ active, setActive }) => {
+  const navigate = useNavigate();
+  const { dispatch } = useContext(UserContext);
+  // Handle logout
+  const handleLogout = async () => {
+    try {
+      dispatch({ type: USER_ACTION.LOGOUT_START });
+
+      const { data } = await axios.get(
+        "http://localhost:9000/api/v1/auth/logout"
+      );
+
+      dispatch({
+        type: USER_ACTION.LOGOUT_SUCCESS,
+        payload: data.message,
+      });
+      localStorage.removeItem("userInfo");
+      navigate("/login");
+      toast.success(data.message);
+    } catch (error) {
+      dispatch({
+        type: USER_ACTION.LOGOUT_FAIL,
+        payload: toast.error(error.response.data.message),
+      });
+    }
+  };
+
   return (
     <aside className="admin-sidebar-wrapper">
       <h4 className="admin-sidebar-title"> Sidebar</h4>
@@ -37,7 +69,10 @@ const AdminSidebar = ({ active, setActive }) => {
           Comments
         </li>
 
-        <li className={active === 5 ? "active-item" : "passive-item"}>
+        <li
+          onClick={handleLogout}
+          className={active === 5 ? "active-item" : "passive-item"}
+        >
           Logout
         </li>
       </ul>

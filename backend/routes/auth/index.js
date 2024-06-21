@@ -6,10 +6,19 @@ import {
   updateUser,
   userLogout,
 } from "../../controllers/authController/index.js";
+import requiredValues from "../../validators/requiredValue/index.js";
+import registerValidator from "../../validators/register/index.js";
+import checkValidation from "../../validators/validationResult/index.js";
 
 const authRouter = express.Router();
 
-authRouter.post("/register", createAccount);
+authRouter.post(
+  "/register",
+  requiredValues(["firstName", "lastName", "email", "password"]),
+  registerValidator(),
+  checkValidation,
+  createAccount
+);
 authRouter.post("/login", loginUser);
 authRouter.put("/:id", updateUser);
 authRouter.delete("/:id", deleteUser);

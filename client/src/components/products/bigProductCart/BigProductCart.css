@@ -65,7 +65,7 @@
 .card-icon {
   cursor: pointer;
   background-color: var(--brandColor);
-  padding: 0.5rem 0.8rem;
+  padding: 0.8rem 0.8rem;
 }
 
 .placeholder-carosolDot {

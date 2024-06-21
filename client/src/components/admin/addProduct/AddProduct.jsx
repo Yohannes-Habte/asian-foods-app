@@ -79,7 +79,7 @@ const AddProduct = () => {
               name="spicy"
               id="spicy"
               value={formData.spicy}
-              className="text-black border-none p-2 text-black rounded outline-none "
+              className="text-black border-none p-2 rounded outline-none "
             >
               <option value="high">High</option>
               <option value="">Medium</option>
@@ -92,12 +92,12 @@ const AddProduct = () => {
               name="spicy"
               id="spicy"
               value={formData.country}
-              className="text-black border-none p-2 text-black rounded outline-none"
+              className="text-black border-none p-2 rounded outline-none"
             >
               <option value="">India</option>
               <option value="pakistan">Pakistan</option>
               <option value="bangladesh">Bangladesh</option>
-              <option value="thailland">Thailland</option>
+              <option value="thailand">Thailand</option>
               <option value="japan">Japan</option>
             </select>
           </div>

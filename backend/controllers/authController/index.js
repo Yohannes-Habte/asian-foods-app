@@ -34,7 +34,7 @@ export const createAccount = async (req, res, next) => {
     const user = userQuery[0];
 
     // generate user token
-    const userRegisterToken = userToken(user.id);
+    const userRegisterToken = userToken(user.user_id);
 
     return res
       .cookie("user_token", userRegisterToken, {
@@ -83,7 +83,7 @@ export const loginUser = async (req, res, next) => {
     }
 
     // Generate user token
-    const loginToken = userToken(user.id);
+    const loginToken = userToken(user.user_id);
 
     return res
       .cookie("user_token", loginToken, {

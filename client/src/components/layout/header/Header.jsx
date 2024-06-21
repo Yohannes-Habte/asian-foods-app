@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./Header.css";
 import { useContext, useState } from "react";
 import { CartContext } from "../../../context/cart/CartProvider";
@@ -6,19 +6,46 @@ import { UserContext } from "../../../context/user/UserProvider";
 import { FaShoppingCart, FaUserCircle, FaBars } from "react-icons/fa";
 import { PiBowlFoodFill } from "react-icons/pi";
 import { MdClose } from "react-icons/md";
+import { USER_ACTION } from "../../../context/user/UserReducer";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Header = () => {
+  const navigate = useNavigate();
   // Global state variables
   const { cartItems } = useContext(CartContext);
-  const { user } = useContext(UserContext);
-
-  const isAdmin = true;
+  const { user, dispatch } = useContext(UserContext);
 
   // Local state variables
   const [openNavbar, setOpenNavbar] = useState(false);
 
   const onClick = () => {
     setOpenNavbar(!openNavbar);
+  };
+
+  // Handle logout
+  const handleLogout = async () => {
+    try {
+      dispatch({ type: USER_ACTION.LOGOUT_START });
+
+      const { data } = await axios.get(
+        "http://localhost:9000/api/v1/auth/logout"
+      );
+
+      dispatch({
+        type: USER_ACTION.LOGOUT_SUCCESS,
+        payload: data.message,
+      });
+      localStorage.removeItem("userInfo");
+
+      toast.success(data.message);
+      navigate("/login");
+    } catch (error) {
+      dispatch({
+        type: USER_ACTION.LOGOUT_FAIL,
+        payload: toast.error(error.response.data.message),
+      });
+    }
   };
 
   const navLinkStyles = ({ isActive }) => {
@@ -51,7 +78,7 @@ const Header = () => {
               </NavLink>{" "}
             </li>
 
-            {isAdmin && (
+            {user && user.is_admin && (
               <li>
                 <NavLink className={navLinkStyles} to="/admin">
                   Admin
@@ -79,10 +106,14 @@ const Header = () => {
               </NavLink>
             </li>
 
-            <li>
+            <li className="flex items-center ">
               {user && user ? (
-                <span className="flex">
-                  <FaUserCircle /> {user?.email}
+                <span className="flex space-x-2 items-center">
+                  <FaUserCircle
+                    onClick={handleLogout}
+                    className="cursor-pointer hover:text-red-500"
+                  />{" "}
+                  <span>{user?.first_name}</span>
                 </span>
               ) : (
                 <Link to={"/login"} className="login">

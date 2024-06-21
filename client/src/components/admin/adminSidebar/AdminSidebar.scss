@@ -21,6 +21,10 @@
     .passive-item {
       color: black;
       cursor: pointer;
+
+      &:hover {
+        color: red;
+      }
     }
   }
 }

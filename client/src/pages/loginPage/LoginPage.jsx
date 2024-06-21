@@ -1,18 +1,23 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./LoginPage.css";
-import { Link } from "react-router-dom";
-// import { loginToContentful } from "../../utils/clientLogin";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../../components/layout/header/Header";
 import Footer from "../../components/layout/footer/Footer";
-// import { UserContext } from "../../context/user/UserProvider";
-// import { USER_ACTION } from "../../context/user/UserReducer";
-// import { toast } from "react-toastify";
+import { UserContext } from "../../context/user/UserProvider";
+import { USER_ACTION } from "../../context/user/UserReducer";
+import { toast } from "react-toastify";
 import axios from "axios";
 const LoginPage = () => {
-  // const { dispatch } = useContext(UserContext);
+  const navigate = useNavigate();
+  const { dispatch } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // const [error, setError] = useState(null);
+
+  const handleReset = () => {
+    setEmail("");
+    setPassword("");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,12 +26,30 @@ const LoginPage = () => {
       password,
     };
     try {
+      dispatch({ type: USER_ACTION.LOGIN_START });
       const { data } = await axios.post(
         "http://localhost:9000/api/v1/auth/login",
         newUser
       );
+      dispatch({
+        type: USER_ACTION.LOGIN_SUCCESS,
+        payload: data.user,
+      });
+
+      if (data.user.is_admin) {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
+
+      toast.success(data.message);
+      localStorage.setItem("userInfo", JSON.stringify(data.user));
+      handleReset();
     } catch (error) {
-      console.log(error.message);
+      dispatch({
+        type: USER_ACTION.LOGIN_FAIL,
+        payload: toast.error(error.response.data.message),
+      });
     }
   };
   return (

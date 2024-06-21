@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import Header from "../../components/layout/header/Header";
 import Footer from "../../components/layout/footer/Footer";
 import { UserContext } from "../../context/user/UserProvider";
-// import { USER_ACTION } from "../../context/user/UserReducer";
-// import { toast } from "react-toastify";
+import { USER_ACTION } from "../../context/user/UserReducer";
+import { toast } from "react-toastify";
 
 const initialState = {
   firstName: "",
@@ -29,7 +29,7 @@ const SignUpPage = () => {
     });
   };
 
-  const reset = () => {
+  const handleReset = () => {
     setFormData({
       firstName: "",
       lastName: "",
@@ -42,6 +42,7 @@ const SignUpPage = () => {
     e.preventDefault();
 
     try {
+      dispatch({ type: USER_ACTION.SIGN_UP_START });
       const newUser = {
         firstName,
         lastName,
@@ -52,8 +53,21 @@ const SignUpPage = () => {
         "http://localhost:9000/api/v1/auth/register",
         newUser
       );
+
+      dispatch({
+        type: USER_ACTION.SIGN_UP_SUCCESS,
+        payload: data,
+      });
+      localStorage.setItem("userInfo", JSON.stringify(data.user));
+
+      toast.success(data.message);
+
+      handleReset();
     } catch (error) {
-      console.log(error.message);
+      dispatch({
+        type: USER_ACTION.SIGN_UP_FAIL,
+        payload: toast.error(error.response.data.message),
+      });
     }
   };
   return (

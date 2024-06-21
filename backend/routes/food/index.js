@@ -9,7 +9,7 @@ import {
 import requiredValues from "../../validators/requiredValue/index.js";
 import productValidator from "../../validators/product/index.js";
 import checkValidation from "../../validators/validationResult/index.js";
-
+import { authAdmin } from "../../middleware/auth/index.js";
 
 const foodRouter = express.Router();
 
@@ -25,11 +25,12 @@ foodRouter.post(
   ]),
   productValidator(),
   checkValidation,
+  authAdmin,
   createFood
 );
 foodRouter.get("/", getAllFoods);
 foodRouter.get("/:id", getFood);
-foodRouter.put("/:id", updateFood);
-foodRouter.delete("/:id", deleteFood);
+foodRouter.put("/:id", authAdmin, updateFood);
+foodRouter.delete("/:id", authAdmin, deleteFood);
 
 export default foodRouter;

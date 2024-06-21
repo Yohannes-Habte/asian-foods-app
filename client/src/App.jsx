@@ -11,6 +11,7 @@ import CartPage from "./pages/cartPage/CartPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdminPage from "./pages/adminPage/AdminPage";
+import ProtectedRoute from "./protectedRoute/ProtectedRoute";
 
 const App = () => {
   return (
@@ -23,7 +24,14 @@ const App = () => {
           path="/products/featured/:id"
           element={<FeaturedProductPage />}
         />
-        <Route path="/admin" element={<AdminPage />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminPage />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/login" element={<LoginPage />} />

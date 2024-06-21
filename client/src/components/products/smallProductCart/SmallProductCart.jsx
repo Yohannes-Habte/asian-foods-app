@@ -1,10 +1,33 @@
 import { Link } from "react-router-dom";
 import "./SmallProductCart.css";
-
 import { FaCartPlus } from "react-icons/fa";
 
+import { useContext } from "react";
+import { CartContext } from "../../../context/cart/CartProvider";
+import { CART_ACTION } from "../../../context/cart/CartReducer";
+import { toast } from "react-toastify";
+
 const SmallProductCart = ({ food }) => {
-  console.log("food:", food);
+  // console.log("food:", food);
+  const { cartItems, dispatch } = useContext(CartContext);
+
+  // Add to cart
+  const addToCartHandler = async (food_id) => {
+    const existingItem = cartItems.find((item) => item.food_id === food_id);
+
+    const quantity = existingItem ? existingItem.quantity + 1 : 1;
+
+    if (existingItem) {
+      toast.warning("Item exist in the cart!");
+    } else {
+      dispatch({
+        type: CART_ACTION.ADD_ITEM_TO_CART,
+        payload: { ...food, quantity },
+      });
+
+      toast.success("Item added to cart successfully!");
+    }
+  };
 
   const {
     food_id,
@@ -40,7 +63,7 @@ const SmallProductCart = ({ food }) => {
           </p>
           <Link>
             <div className="p-2 bg-cyan-200">
-              <FaCartPlus />
+              <FaCartPlus onClick={() => addToCartHandler(food_id)} />
             </div>
           </Link>
         </div>

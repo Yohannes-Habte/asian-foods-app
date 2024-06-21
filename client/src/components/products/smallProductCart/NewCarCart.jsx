@@ -6,7 +6,7 @@ import { CART_ACTION } from "../../../context/cart/CartReducer";
 import { toast } from "react-toastify";
 import { FaCartPlus } from "react-icons/fa";
 
-const NewCarCart = ({ car }) => {
+const NewCarCart = ({ food }) => {
   const { cartItems, dispatch } = useContext(CartContext);
 
   // Add to cart
@@ -20,7 +20,7 @@ const NewCarCart = ({ car }) => {
     } else {
       dispatch({
         type: CART_ACTION.ADD_ITEM_TO_CART,
-        payload: { ...car, quantity },
+        payload: { ...food, quantity },
       });
 
       toast.success("Item added to cart successfully!");
@@ -58,7 +58,6 @@ const NewCarCart = ({ car }) => {
           </div>
         </Link>
       </div>
-   
     </section>
   );
 };

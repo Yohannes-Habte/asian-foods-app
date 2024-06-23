@@ -1,22 +1,41 @@
-import { useState } from "react";
-import "./AddProduct.css";
 import axios from "axios";
+import { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
+import "./UpdateProduct.scss";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { URL } from "../../../utils/myLocalURL";
 
-const AddProduct = ({ setOpenAddProduct }) => {
+const UpdateProduct = ({ setOpenUpdateProduct }) => {
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const [data, setData] = useState(null);
+
   const [formData, setFormData] = useState({
-    food_name: "",
-    food_price: "",
-    description: "",
-    country: "",
-    spiceLevel: "",
+    food_name: data?.food_name || "",
+    food_price: data?.food_price || "",
+    description: data?.description || "",
+    country: data?.country || "",
+    spiceLevel: data?.spiceLevel || "",
   });
+  const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState(null);
 
   const { food_name, food_price, description, country, spiceLevel } = formData;
 
-  const [image, setImage] = useState(null);
+  useEffect(() => {
+    const fetchSingleFood = async () => {
+      try {
+        const { data } = await axios.get(
+          `http://localhost:9000/api/v1/foods/${id}`
+        );
+        setData(data.food);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    fetchSingleFood();
+  }, []);
 
   const handleImage = (e) => {
     setImage(e.target.files[0]);
@@ -55,7 +74,8 @@ const AddProduct = ({ setOpenAddProduct }) => {
     const { url } = response.data;
 
     try {
-      const newProduct = {
+      setLoading(true);
+      const updateProduct = {
         food_name,
         food_price,
         description,
@@ -63,15 +83,14 @@ const AddProduct = ({ setOpenAddProduct }) => {
         spiceLevel,
         image: url,
       };
-      const { data } = await axios.post(
-        `${URL}/foods/new`,
-
-        newProduct
-      );
+      const { data } = await axios.put(`${URL}/foods/${id}`, updateProduct);
       toast.success(data.message);
+      setLoading(false);
       handleReset();
+      navigate("/admin");
     } catch (error) {
       toast.error(error.response.data.message);
+      setLoading(false);
     }
   };
 
@@ -79,11 +98,11 @@ const AddProduct = ({ setOpenAddProduct }) => {
     <article className="modal">
       <section className="popup-box bg-cyan-900">
         <IoMdClose
-          onClick={() => setOpenAddProduct(false)}
+          onClick={() => setOpenUpdateProduct(false)}
           className="close-modal"
         />
-        <h4 className="new-car-text text-center  text-white mb-5">
-          Add your product
+        <h4 className="food-title text-center  text-white">
+          Update {data?.food_name}
         </h4>
         <form
           onSubmit={handleSubmit}
@@ -182,7 +201,9 @@ const AddProduct = ({ setOpenAddProduct }) => {
             type="submit"
             className="bg-cyan-500 py-2 rounded-3xl hover:bg-orange-400 text-semibold"
           >
-            Add product
+            {loading && "Loading..."}
+            {!loading && "Update product"}
+            
           </button>
         </form>
       </section>
@@ -190,4 +211,4 @@ const AddProduct = ({ setOpenAddProduct }) => {
   );
 };
 
-export default AddProduct;
+export default UpdateProduct;

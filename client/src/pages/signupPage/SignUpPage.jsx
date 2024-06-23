@@ -1,12 +1,13 @@
 import { useContext, useState } from "react";
 import axios from "axios";
 import "./SignUpPage.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../../components/layout/header/Header";
 import Footer from "../../components/layout/footer/Footer";
 import { UserContext } from "../../context/user/UserProvider";
 import { USER_ACTION } from "../../context/user/UserReducer";
 import { toast } from "react-toastify";
+import { URL } from "../../utils/myLocalURL";
 
 const initialState = {
   firstName: "",
@@ -16,6 +17,7 @@ const initialState = {
 };
 
 const SignUpPage = () => {
+  const navigate = useNavigate();
   const { dispatch } = useContext(UserContext);
 
   const [formData, setFormData] = useState(initialState);
@@ -49,24 +51,21 @@ const SignUpPage = () => {
         email,
         password,
       };
-      const { data } = await axios.post(
-        "http://localhost:9000/api/v1/auth/register",
-        newUser
-      );
+      const { data } = await axios.post(`${URL}/auth/register`, newUser);
 
       dispatch({
         type: USER_ACTION.SIGN_UP_SUCCESS,
-        payload: data,
+        payload: data.user,
       });
       localStorage.setItem("userInfo", JSON.stringify(data.user));
 
       toast.success(data.message);
-
       handleReset();
+      navigate("/login");
     } catch (error) {
       dispatch({
         type: USER_ACTION.SIGN_UP_FAIL,
-        payload: toast.error(error.response.data.message),
+        payload: toast.error(error),
       });
     }
   };

@@ -1,19 +1,47 @@
-.product-table {
-  width: 100%;
-
-  .table-head {
-    text-align: left;
-    background-color: #ccd5ae;
-
-    .head-cell {
-      padding: 0.5rem;
-    }
+.orders-wrapper {
+  .orders-title {
+    font-size: 1.6rem;
+    padding: 0.3rem 0;
+    color: #ffffffe1;
+    margin-top: 1rem;
   }
 
-  .body-tr {
-    .body-cell {
-      border-bottom: 1px solid rgb(211, 203, 203);
-      padding: 0.5rem;
+  .orders-table {
+    width: 100%;
+    margin-top: 2rem;
+
+    .table-head {
+      text-align: left;
+      background-color: #ccd5ae;
+
+      .head-cell {
+        padding: 0.5rem;
+      }
+    }
+
+    .body-tr {
+      .body-cell {
+        border-bottom: 1px solid rgb(211, 203, 203);
+        padding: 1rem;
+        color: white;
+
+        .image {
+          width: 5rem;
+          height: 5rem;
+          object-fit: cover;
+          border-radius: 50%;
+        }
+      }
+
+      .pending {
+        color: #e6bf6d;
+      }
+      .paid {
+        padding: 1rem;
+        color: #01fa01;
+        font-weight: bold;
+        border-bottom: 1px solid rgb(211, 203, 203);
+      }
     }
   }
 }

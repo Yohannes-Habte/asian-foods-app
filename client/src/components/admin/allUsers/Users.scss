@@ -1,22 +1,57 @@
-.product-table {
+.users-wrapper {
+  position: relative;
+
+  .users-title {
+    font-size: 1.6rem;
+    padding: 0.3rem 0;
+    color: #ffffffe1;
+    margin-top: 1rem;
+  }
+
+  .users-table {
     width: 100%;
-  
+    margin-top: 2rem;
+
     .table-head {
       text-align: left;
       background-color: #ccd5ae;
-  
+
       .head-cell {
         padding: 0.5rem;
       }
+
+      .message {
+        width: 900px;
+      }
+
+      .createAt {
+        width: 10rem;
+        text-align: center;
+      }
     }
-  
+
     .body-tr {
-   
-  
       .body-cell {
         border-bottom: 1px solid rgb(211, 203, 203);
-        padding: 0.5rem;
-       
+        padding: 1rem;
+        color: white;
+
+        .image {
+          width: 5rem;
+          height: 5rem;
+          object-fit: cover;
+          border-radius: 50%;
+        }
+      }
+
+      .paragraph {
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        text-align: justify;
+      }
+
+      .date {
+        text-align: center;
       }
     }
   }
+}

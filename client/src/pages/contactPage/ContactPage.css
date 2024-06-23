@@ -23,12 +23,16 @@
   padding: 2rem;
   border-radius: 0.8rem;
   margin-top: 4rem;
-  margin-bottom: 20rem;
   color: var(--textLight);
 
   /* input {
     padding: 0.2rem -2rem 0.2rem 0.8rem;
   } */
+}
+
+.signal-for-user {
+  color: #f42121;
+  margin-top: -2rem;
 }
 
 @media screen and (max-width: 677px) {

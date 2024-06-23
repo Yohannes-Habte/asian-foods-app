@@ -6,15 +6,23 @@ import createError from "http-errors";
 //====================================================================
 
 export const createComment = async (req, res, next) => {
-  const { email, comment } = req.body;
+  const { email, comment, userID } = req.body;
 
-  if (!email || !comment) {
+  if (!email || !comment || !userID) {
     return res.status(400).json({ error: "All fields are required" });
   }
 
   try {
+    // Fetch user from the database
+    const userQuery = await sql`SELECT * FROM users WHERE user_id = ${userID}`;
+
+    // Check if user exists
+    if (userQuery.length === 0) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
     const result =
-      await sql`INSERT INTO comments(email, comment) VALUES(${email}, ${comment}) RETURNING *`;
+      await sql`INSERT INTO comments(email, comment, userID) VALUES(${email}, ${comment}, ${userID}) RETURNING *`;
 
     res.status(201).json({
       success: true,

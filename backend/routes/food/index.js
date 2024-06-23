@@ -25,12 +25,11 @@ foodRouter.post(
   ]),
   productValidator(),
   checkValidation,
-  authAdmin,
   createFood
 );
 foodRouter.get("/", getAllFoods);
 foodRouter.get("/:id", getFood);
-foodRouter.put("/:id", authAdmin, updateFood);
-foodRouter.delete("/:id", authAdmin, deleteFood);
+foodRouter.put("/:id", updateFood);
+foodRouter.delete("/:id", deleteFood);
 
 export default foodRouter;

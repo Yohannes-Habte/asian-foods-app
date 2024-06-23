@@ -21,8 +21,8 @@ authRouter.post(
   createAccount
 );
 authRouter.post("/login", loginUser);
-authRouter.put("/:id", authUser, updateUser);
-authRouter.delete("/:id", authAdmin, deleteUser);
+authRouter.put("/:id", updateUser);
+authRouter.delete("/:id", deleteUser);
 authRouter.get("/logout", userLogout);
 
 export default authRouter;

@@ -51,6 +51,7 @@ export const createAccount = async (req, res, next) => {
         message: "Account successfully created",
       });
   } catch (error) {
+    console.log(error)
     next(createError(500, "Database query failed!"));
   }
 };

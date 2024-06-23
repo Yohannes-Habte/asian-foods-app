@@ -12,6 +12,9 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdminPage from "./pages/adminPage/AdminPage";
 import ProtectedRoute from "./protectedRoute/ProtectedRoute";
+import UpdateProduct from "./components/admin/updateProduct/UpdateProduct";
+import CheckoutPage from "./pages/checkoutPage/CheckoutPage";
+
 
 const App = () => {
   return (
@@ -20,6 +23,8 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/products/:id" element={<ProductPage />} />
+        <Route path="/products/product/:id" element={<UpdateProduct />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
         <Route
           path="/products/featured/:id"
           element={<FeaturedProductPage />}

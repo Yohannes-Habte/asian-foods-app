@@ -1,5 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import "./Comments.scss";
+import { FaTrash } from "react-icons/fa";
+import { URL } from "../../../utils/myLocalURL";
 
 const Comments = () => {
   const [comments, setComments] = useState([]);
@@ -9,9 +12,7 @@ const Comments = () => {
   useEffect(() => {
     const fetchAllUsers = async () => {
       try {
-        const { data } = await axios.get(
-          "http://localhost:9000/api/v1/comments"
-        );
+        const { data } = await axios.get(`${URL}/comments`);
         setComments(data.comments);
       } catch (error) {
         console.log(error);
@@ -20,17 +21,28 @@ const Comments = () => {
     fetchAllUsers();
   }, []);
 
-  return (
-    <section>
-      <h2>List of Comments</h2>
+  const deleteComment = async (commentId) => {
+    try {
+      await axios.delete(`${URL}/comments/${commentId}`);
+      setComments(
+        comments.filter((comment) => comment.comment_id !== commentId)
+      );
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
-      <table className="product-table">
+  return (
+    <section className="comments-wrapper">
+      <h2 className="comments-title">List of Comments</h2>
+
+      <table className="comments-table">
         <thead className="table-head">
           <tr className="head-tr">
-            <th className="head-cell"> Comment ID</th>
+            <th className="head-cell"> ID</th>
             <th className="head-cell"> Email</th>
-            <th className="head-cell">Message</th>
-            <th className="head-cell">CreatedAt</th>
+            <th className="head-cell message">User Message</th>
+            <th className="head-cell createAt">CreatedAt</th>
             <th className="head-cell">Action</th>
           </tr>
         </thead>
@@ -41,9 +53,18 @@ const Comments = () => {
                 <tr key={comment.comment_id} className="body-tr">
                   <td className="body-cell"> {comment.comment_id} </td>
                   <td className="body-cell"> {comment.email} </td>
-                  <td className="body-cell"> {comment.comment} </td>
-                  <td className="body-cell"> {comment.created_at.slice(0, 10)} </td>
-                  <td className="body-cell">delete | Edit </td>
+                  <td className="body-cell paragraph"> {comment.comment} </td>
+                  <td className="body-cell date">
+                    {" "}
+                    {comment.created_at.slice(0, 10)}{" "}
+                  </td>
+                  <td className="body-cell">
+                    {" "}
+                    <FaTrash
+                      onClick={() => deleteComment(comment.comment_id)}
+                      className="text-red-500 cursor-pointer hover:text-red-700"
+                    />{" "}
+                  </td>
                 </tr>
               );
             })}

@@ -13,8 +13,8 @@ const registerValidator = () => {
       .notEmpty()
       .trim()
       .escape()
-      .isLength({ min: 30, max: 200 })
-      .withMessage("Text message should be between 30 and 200 characters"),
+      .isLength({ min: 2, max: 15 })
+      .withMessage("Text message should be between 2 and 15 characters"),
 
     check("email")
       .isEmail()

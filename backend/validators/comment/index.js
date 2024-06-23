@@ -12,8 +12,8 @@ const commentValidator = () => {
       .notEmpty()
       .trim()
       .escape()
-      .isLength({ min: 30, max: 200 })
-      .withMessage("Text message should be between 30 and 200 characters"),
+      .isLength({ min: 50, max: 900 })
+      .withMessage("Text message should be between 50 and 900 characters"),
   ];
 };
 

@@ -7,7 +7,9 @@ import { useContext } from "react";
 import { CART_ACTION } from "../../../context/cart/CartReducer";
 import { toast } from "react-toastify";
 
-const BigProductCart = ({ food }) => {
+const 
+
+BigProductCart = ({ food }) => {
   const { food_id, food_name, description, food_price, image, spicelevel } =
     food;
 
@@ -15,7 +17,7 @@ const BigProductCart = ({ food }) => {
 
   // Add to cart
   const addToCartHandler = async (id) => {
-    const existingItem = cartItems.find((item) => item.sys.id === id);
+    const existingItem = cartItems.find((item) => item.food_id === id);
 
     const quantity = existingItem ? existingItem.quantity + 1 : 1;
 
@@ -24,7 +26,7 @@ const BigProductCart = ({ food }) => {
     } else {
       dispatch({
         type: CART_ACTION.ADD_ITEM_TO_CART,
-        payload: { ...data, quantity },
+        payload: { ...food, quantity },
       });
 
       toast.success("Item added to cart successfully!");
@@ -52,12 +54,12 @@ const BigProductCart = ({ food }) => {
                 <p>${food_price}</p>
               </div>
               <div className="py-2 px-4 bg-cyan-400 hover:bg-cyan-800 hover:text-white cursor-pointer rounded">
-                <FaCartPlus />
+                <FaCartPlus onClick={() => addToCartHandler(food_id)} />
               </div>
             </div>
           </div>
         </div>
-        <img src={image} alt={name} className="photo-card-big" />
+        <img src={image} alt={food_name} className="photo-card-big" />
       </section>
     </>
   );

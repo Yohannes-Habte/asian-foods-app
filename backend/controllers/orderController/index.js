@@ -5,16 +5,48 @@ import createError from "http-errors";
 // Create Order
 //====================================================================
 export const createOrder = async (req, res, next) => {
-  const { order_name, quantity, userID, total_price } = req.body;
+  const {
+    order_name,
+    quantity,
+    country,
+    userID,
+    total_price,
+    address,
+    phone,
+    email,
+  } = req.body;
 
   // Check if all fields are provided
-  if (!order_name || !quantity || !userID || !total_price) {
+  if (
+    !order_name ||
+    !quantity ||
+    !country ||
+    !userID ||
+    !total_price ||
+    !address ||
+    !phone ||
+    !email
+  ) {
     return res.status(400).json({ error: "All fields are required" });
+  }
+
+  // Validate data types
+  const parsedQuantity = parseInt(quantity);
+  const parsedUserID = parseInt(userID);
+  const parsedTotalPrice = parseFloat(total_price);
+
+  if (isNaN(parsedQuantity) || isNaN(parsedUserID) || isNaN(parsedTotalPrice)) {
+    return res
+      .status(400)
+      .json({
+        error: "Invalid data types for quantity, userID, or total_price",
+      });
   }
 
   try {
     // Fetch user from the database
-    const userQuery = await sql`SELECT * FROM users WHERE user_id = ${userID}`;
+    const userQuery =
+      await sql`SELECT * FROM users WHERE user_id = ${parsedUserID}`;
 
     // Check if user exists
     if (userQuery.length === 0) {
@@ -23,9 +55,9 @@ export const createOrder = async (req, res, next) => {
 
     // Insert order into the database
     const result = await sql`
-            INSERT INTO orders ( order_name, quantity, userID, total_price) 
-            VALUES ( ${order_name}, ${quantity}, ${userID}, ${total_price}) 
-            RETURNING *`;
+      INSERT INTO orders (order_name, quantity, country, userID, total_price, address, phone, email) 
+      VALUES (${order_name}, ${parsedQuantity}, ${country}, ${parsedUserID}, ${parsedTotalPrice}, ${address}, ${phone}, ${email}) 
+      RETURNING *`;
 
     // Send a success response
     res.status(201).json({
@@ -72,8 +104,7 @@ export const getOrder = async (req, res, next) => {
   }
 
   try {
-    const result =
-      await sql`SELECT * FROM orders WHERE order_id = ${orderId}`;
+    const result = await sql`SELECT * FROM orders WHERE order_id = ${orderId}`;
 
     if (result.length === 0) {
       return next(createError(404, "Order not found"));

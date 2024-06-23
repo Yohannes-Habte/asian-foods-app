@@ -1,35 +1,69 @@
+.modal {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #202424d2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+  z-index: 99;
+}
+
+.popup-box {
+  position: relative;
+  padding: 0 3rem;
+  border-radius: 0.5rem;
+  box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+  padding: 1rem;
+  border-radius: 0.3rem;
+  line-height: 1.5rem;
+}
+
+.close-modal {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+  color: #ffffff;
+
+  &:hover {
+    color: tomato;
+  }
+}
+
 .form-container-add {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    width: 60vw;
-    max-width: 500px;
-    margin: auto;
-    background-color: var(--grayDark);
-    padding: 2rem;
-    border-radius: 0.8rem;
-    margin-top: 4rem;
-    margin-bottom: 20rem;
-    color: var(--textLight);
-  }
-  
-  .custom-file-upload {
-    background-color: var(--grayLight);
-    border-radius: 0.4rem;
-    color: var(--textDark);
-  }
-  
-  input[type="file"]::file-selector-button {
-    padding: 0.4rem 0.8rem;
-    margin-right: 0.8rem;
-    border: none;
-    background-color: var(--grayMedium);
-    color: var(--textLight);
-    transition: 0.3s;
-  }
-  
-  input[type="file"]::file-selector-button:hover {
-    background-color: var(--brandColor);
-    cursor: pointer;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 60vw;
+  max-width: 500px;
+  margin: auto;
+  background-color: var(--grayDark);
+  padding: 1rem 2rem;
+  border-radius: 0.8rem;
+  color: var(--textLight);
+}
+
+.custom-file-upload {
+  background-color: var(--grayLight);
+  border-radius: 0.4rem;
+  color: var(--textDark);
+}
+
+input[type="file"]::file-selector-button {
+  padding: 0.4rem 0.8rem;
+  margin-right: 0.8rem;
+  border: none;
+  background-color: var(--grayMedium);
+  color: var(--textLight);
+  transition: 0.3s;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: var(--brandColor);
+  cursor: pointer;
+}

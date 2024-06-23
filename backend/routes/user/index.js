@@ -4,7 +4,7 @@ import { authAdmin } from "../../middleware/auth/index.js";
 
 const userRouter = express.Router();
 
-userRouter.get("/", authAdmin, getUsers);
+userRouter.get("/", getUsers);
 userRouter.get("/:id", getUser);
 
 export default userRouter;

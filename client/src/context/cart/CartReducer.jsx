@@ -15,7 +15,7 @@ const CartReducer = (state, action) => {
 
       const cartItems = existingItem
         ? state.cartItems.map((item) =>
-            item.sys.id === existingItem.sys.id ? newItem : item
+            item.food_id === existingItem.food_id ? newItem : item
           )
         : [...state.cartItems, newItem];
 

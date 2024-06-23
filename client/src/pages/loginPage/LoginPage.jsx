@@ -7,6 +7,7 @@ import { UserContext } from "../../context/user/UserProvider";
 import { USER_ACTION } from "../../context/user/UserReducer";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { URL } from "../../utils/myLocalURL";
 const LoginPage = () => {
   const navigate = useNavigate();
   const { dispatch } = useContext(UserContext);
@@ -27,10 +28,7 @@ const LoginPage = () => {
     };
     try {
       dispatch({ type: USER_ACTION.LOGIN_START });
-      const { data } = await axios.post(
-        "http://localhost:9000/api/v1/auth/login",
-        newUser
-      );
+      const { data } = await axios.post(`${URL}/auth/login`, newUser);
       dispatch({
         type: USER_ACTION.LOGIN_SUCCESS,
         payload: data.user,

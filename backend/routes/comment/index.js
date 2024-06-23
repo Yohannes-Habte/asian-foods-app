@@ -20,8 +20,8 @@ commentRouter.post(
   checkValidation,
   createComment
 );
-commentRouter.get("/", authAdmin, getComments);
-commentRouter.get("/:id", authAdmin, getComment);
-commentRouter.delete("/:id", authAdmin, deleteComment);
+commentRouter.get("/", getComments);
+commentRouter.get("/:id",  getComment);
+commentRouter.delete("/:id", deleteComment);
 
 export default commentRouter;

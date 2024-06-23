@@ -1,16 +1,20 @@
 import "./CartPage.css";
 import Footer from "../../components/layout/footer/Footer";
 import Header from "../../components/layout/header/Header";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CartContext } from "../../context/cart/CartProvider";
 import "./CartPage.css";
 import { useContext } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 import { CART_ACTION } from "../../context/cart/CartReducer";
+import { UserContext } from "../../context/user/UserProvider";
 
 const CartPage = () => {
+  const navigate = useNavigate();
   const { cartItems, dispatch } = useContext(CartContext);
-  console.log(cartItems);
+  const { user } = useContext(UserContext);
+
+  console.log("cart items  =>", cartItems);
 
   // Remove Item from the cart
   const removeItem = (item) => {
@@ -26,6 +30,14 @@ const CartPage = () => {
       type: CART_ACTION.ADD_ITEM_TO_CART,
       payload: { ...item, quantity },
     });
+  };
+
+  const checkoutHandler = () => {
+    if (!user) {
+      navigate("/login");
+    } else {
+      navigate("/checkout");
+    }
   };
 
   return (
@@ -44,10 +56,7 @@ const CartPage = () => {
               <div className="items-container">
                 {cartItems.map((item) => {
                   console.log(item);
-                  // const {
-                  //   food: { food_id, food_name, food_price, country, image },
-                  //   quantity,
-                  // } = item;
+
                   const {
                     food_id,
                     food_name,
@@ -90,25 +99,28 @@ const CartPage = () => {
                           </div>
                           <div className="flex items-center justify-between">
                             <div className="buttons-quantity-wrapper">
-                              <div
-                                className="py-1 px-3 bg-cyan-400 font-bold text-white rounded"
-                                onClick={() =>
-                                  updateCart(item, item.quantity - 1)
-                                }
-                                disabled={item.quantity < 2}
-                              >
-                                <button>-</button>
+                              <div className="py-1 px-3 bg-cyan-400 font-bold text-white rounded">
+                                <button
+                                  onClick={() =>
+                                    updateCart(item, item.quantity - 1)
+                                  }
+                                  disabled={item.quantity <= 1}
+                                >
+                                  -
+                                </button>
                               </div>
                               <span className="quantity">
                                 <strong>{item.quantity}</strong>
                               </span>
-                              <div
-                                className="py-1 px-2 bg-cyan-400 font-bold text-white rounded"
-                                onClick={() =>
-                                  updateCart(item, item.quantity + 1)
-                                }
-                              >
-                                <button>+</button>
+                              <div className="py-1 px-2 bg-cyan-400 font-bold text-white rounded">
+                                <button
+                                  onClick={() =>
+                                    updateCart(item, item.quantity + 1)
+                                  }
+                                  disabled={item.quantity >= 5}
+                                >
+                                  +
+                                </button>
                               </div>
                             </div>
                             <div className="price-wrapper bg-gray-600 py-1 px-4 ml-20 rounded font-semibold text-white">
@@ -137,8 +149,7 @@ const CartPage = () => {
                     <p className="bg-cyan-700 mx-2 text-white px-3 py-1 rounded">
                       $
                       {cartItems.reduce(
-                        (acc, curr) =>
-                          acc + curr.fields?.food_price * curr.quantity,
+                        (acc, curr) => acc + curr.food_price * curr.quantity,
                         0
                       )}
                     </p>
@@ -148,6 +159,7 @@ const CartPage = () => {
                 <button
                   type="button"
                   className="checkout-btn bg-green-700 rounded py-2 px-3 font-bold hover:bg-cyan-600"
+                  onClick={checkoutHandler}
                 >
                   Checkout
                 </button>

@@ -5,7 +5,19 @@
     .admin-page-title {
       text-align: center;
       font-size: 2rem;
-      background-color: #a8dadc;
+      background-color: #395257;
+      color: #ccc7c7;
+      padding: 0.5rem;
+
+      .go-back-icon {
+        position: absolute;
+        top:1rem;
+        left: 1rem;
+
+        &:hover {
+          color: tomato;
+        }
+      }
     }
 
     .admin-sidebar-and-main-wrapper {

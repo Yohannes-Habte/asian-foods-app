@@ -1,11 +1,12 @@
 .admin-sidebar-wrapper {
-  background-color: #90e0ef;
+  background-color: #395257;
   padding: 1rem;
   min-height: 100vh;
 
   .admin-sidebar-title {
     font-size: 1.4rem;
     margin-bottom: 1rem;
+    color: #ccc7c7;
   }
 
   .sidebar-items {
@@ -19,7 +20,7 @@
     }
 
     .passive-item {
-      color: black;
+      color: #ccc7c7;
       cursor: pointer;
 
       &:hover {

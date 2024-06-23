@@ -2,13 +2,20 @@ import axios from "axios";
 import Footer from "../../components/layout/footer/Footer";
 import Header from "../../components/layout/header/Header";
 import "./ContactPage.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { toast } from "react-toastify";
+import { UserContext } from "../../context/user/UserProvider";
+import { URL } from "../../utils/myLocalURL";
 
 const ContactPage = () => {
+  const { user } = useContext(UserContext);
   const [formData, setFormData] = useState({
     email: "",
     comment: "",
   });
+  const [loading, setLoading] = useState(false);
+
+  const { email, comment } = formData;
 
   const handleChange = (e) => {
     setFormData({
@@ -17,21 +24,30 @@ const ContactPage = () => {
     });
   };
 
+  const handleReset = () => {
+    setFormData({
+      email: "",
+      comment: "",
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const newComment = {
-      email: formData.email,
-      comment: formData.comment,
+      email: email,
+      comment: comment,
+      userID: user.user_id,
     };
     try {
-      // eslint-disable-next-line no-unused-vars
-      const { data } = await axios.post(
-        "http://localhost:9000/api/v1/comments/new",
-        newComment
-      );
+      setLoading(true);
+      const { data } = await axios.post(`${URL}/comments/new`, newComment);
+      toast.success(data.message);
+      setLoading(false);
+      handleReset();
     } catch (error) {
-      console.log(error.comment);
+      toast.error(error.response.data.message);
+      setLoading(false);
     }
   };
 
@@ -72,11 +88,25 @@ const ContactPage = () => {
             ></textarea>
           </div>
 
+          {comment.length === 0 ? (
+            ""
+          ) : (
+            <div className="signal-for-user">
+              {50 - comment.trim().length > 0
+                ? `${
+                    50 - comment.trim().length
+                  } characters are required to submit your message`
+                : ""}
+            </div>
+          )}
+
           <button
             type="submit"
             className="bg-cyan-600 py-2 rounded-3xl hover:bg-orange-400 text-semibold"
           >
-            Send your comment
+            {loading && "Loading..."}
+
+            {!loading && "Send"}
           </button>
         </form>
       </section>

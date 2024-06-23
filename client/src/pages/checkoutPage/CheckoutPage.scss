@@ -1,0 +1,27 @@
+.checkout-page {
+  .checkout-page-container {
+    width: 90%;
+    margin: auto;
+
+    .checkout-page-title {
+      margin: 1rem 0;
+      text-align: center;
+      color: white;
+      font-size: 1.8rem;
+    }
+
+    .checkout-form {
+      width: 50%;
+      margin: 1rem auto;
+      padding: 2rem;
+      color: white;
+      border-radius: 0.5rem;
+
+      .inputs-wrapper {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 1rem;
+      }
+    }
+  }
+}

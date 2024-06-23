@@ -44,27 +44,22 @@ const AdminSidebar = ({ active, setActive }) => {
         >
           Products
         </li>
+      
         <li
           onClick={() => setActive(2)}
           className={active === 2 ? "active-item" : "passive-item"}
         >
-          Add Product
+          Users
         </li>
         <li
           onClick={() => setActive(3)}
           className={active === 3 ? "active-item" : "passive-item"}
         >
-          Users
+          Orders
         </li>
         <li
           onClick={() => setActive(4)}
           className={active === 4 ? "active-item" : "passive-item"}
-        >
-          Orders
-        </li>
-        <li
-          onClick={() => setActive(5)}
-          className={active === 5 ? "active-item" : "passive-item"}
         >
           Comments
         </li>

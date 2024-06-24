@@ -18,10 +18,11 @@ commentRouter.post(
   requiredValues(["email", "comment"]),
   commentValidator(),
   checkValidation,
+  authUser,
   createComment
 );
-commentRouter.get("/", getComments);
-commentRouter.get("/:id",  getComment);
-commentRouter.delete("/:id", deleteComment);
+commentRouter.get("/", authAdmin, getComments);
+commentRouter.get("/:id", authAdmin,  getComment);
+commentRouter.delete("/:id",authAdmin, deleteComment);
 
 export default commentRouter;

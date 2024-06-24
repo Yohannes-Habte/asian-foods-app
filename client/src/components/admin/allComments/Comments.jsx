@@ -12,7 +12,9 @@ const Comments = () => {
   useEffect(() => {
     const fetchAllUsers = async () => {
       try {
-        const { data } = await axios.get(`${URL}/comments`);
+        const { data } = await axios.get(`${URL}/comments`, {
+          withCredentials: true,
+        });
         setComments(data.comments);
       } catch (error) {
         console.log(error);
@@ -23,7 +25,9 @@ const Comments = () => {
 
   const deleteComment = async (commentId) => {
     try {
-      await axios.delete(`${URL}/comments/${commentId}`);
+      await axios.delete(`${URL}/comments/${commentId}`, {
+        withCredentials: true,
+      });
       setComments(
         comments.filter((comment) => comment.comment_id !== commentId)
       );

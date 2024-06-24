@@ -13,7 +13,9 @@ const Orders = () => {
   useEffect(() => {
     const fetchAllUsers = async () => {
       try {
-        const { data } = await axios.get(`${URL}/orders`);
+        const { data } = await axios.get(`${URL}/orders`, {
+          withCredentials: true,
+        });
         setOrders(data.orders);
       } catch (error) {
         console.log(error);
@@ -24,7 +26,9 @@ const Orders = () => {
 
   const deleteOrder = async (orderId) => {
     try {
-      await axios.delete(`${URL}/orders/${orderId}`);
+      await axios.delete(`${URL}/orders/${orderId}`, {
+        withCredentials: true,
+      } );
       setOrders(orders.filter((order) => order.order_id !== orderId));
     } catch (error) {
       console.log(error.message);

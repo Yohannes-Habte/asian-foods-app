@@ -28,7 +28,9 @@ const LoginPage = () => {
     };
     try {
       dispatch({ type: USER_ACTION.LOGIN_START });
-      const { data } = await axios.post(`${URL}/auth/login`, newUser);
+      const { data } = await axios.post(`${URL}/auth/login`, newUser, {
+        withCredentials: true,
+      });
       dispatch({
         type: USER_ACTION.LOGIN_SUCCESS,
         payload: data.user,

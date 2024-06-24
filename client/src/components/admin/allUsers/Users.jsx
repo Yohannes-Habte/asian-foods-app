@@ -13,7 +13,9 @@ const Users = () => {
   useEffect(() => {
     const fetchAllUsers = async () => {
       try {
-        const { data } = await axios.get(`${URL}/users`);
+        const { data } = await axios.get(`${URL}/users`, {
+          withCredentials: true,
+        });
         setUserData(data.data);
       } catch (error) {
         console.log(error);
@@ -24,7 +26,9 @@ const Users = () => {
 
   const deleteUser = async (userId) => {
     try {
-      await axios.delete(`${URL}/auth/${userId}`);
+      await axios.delete(`${URL}/auth/${userId}`,{
+        withCredentials: true,
+      });
       setUserData(userData.filter((user) => user.user_id !== userId));
     } catch (error) {
       console.log(error.message);

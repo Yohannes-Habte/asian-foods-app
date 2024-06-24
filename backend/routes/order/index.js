@@ -10,8 +10,8 @@ import { authAdmin, authUser } from "../../middleware/auth/index.js";
 const orderRouter = express.Router();
 
 orderRouter.post("/new", createOrder);
-orderRouter.get("/", getAllOrders);
+orderRouter.get("/", authAdmin, getAllOrders);
 orderRouter.get("/:id", getOrder);
-orderRouter.delete("/:id", deleteOrder);
+orderRouter.delete("/:id", authAdmin, deleteOrder);
 
 export default orderRouter;

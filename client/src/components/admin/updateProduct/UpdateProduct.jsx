@@ -5,6 +5,8 @@ import "./UpdateProduct.scss";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { URL } from "../../../utils/myLocalURL";
+import { Link } from "react-router-dom";
+import { FaArrowAltCircleLeft } from "react-icons/fa";
 
 const UpdateProduct = ({ setOpenUpdateProduct }) => {
   const navigate = useNavigate();
@@ -102,6 +104,13 @@ const UpdateProduct = ({ setOpenUpdateProduct }) => {
           className="close-modal"
         />
         <h4 className="food-title text-center  text-white">
+          <Link to={"/"}>
+            {" "}
+            <FaArrowAltCircleLeft
+              title="Return Home Page"
+              className="go-back-icon"
+            />{" "}
+          </Link>{" "}
           Update {data?.food_name}
         </h4>
         <form
@@ -203,7 +212,6 @@ const UpdateProduct = ({ setOpenUpdateProduct }) => {
           >
             {loading && "Loading..."}
             {!loading && "Update product"}
-            
           </button>
         </form>
       </section>

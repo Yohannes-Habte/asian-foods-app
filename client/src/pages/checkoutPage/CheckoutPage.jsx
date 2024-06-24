@@ -55,6 +55,9 @@ const CheckoutPage = () => {
       const { data } = await axios.post(`${URL}/orders/new`, newOrder);
       toast.success(data.message);
       handleReset();
+      localStorage.removeItem("cartItems");
+      // To reload the current page
+      window.location.reload();
     } catch (error) {
       toast.error(error.response.data.message);
     }

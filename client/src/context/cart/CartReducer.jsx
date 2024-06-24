@@ -1,6 +1,7 @@
 export const CART_ACTION = {
   ADD_ITEM_TO_CART: "ADD_ITEM_TO_CART",
   REMOVE_ITEM_FROM_CART: "REMOVE_ITEM_FROM_CART",
+  CLEAR_CART: 'CLEAR_CART',
 };
 
 const CartReducer = (state, action) => {
@@ -33,6 +34,9 @@ const CartReducer = (state, action) => {
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
       return { ...state, cartItems };
     }
+
+    case CART_ACTION.CLEAR_CART:
+      return { ...state, cart:[] };
 
     // Default state
     default:

@@ -29,7 +29,7 @@ foodRouter.post(
 );
 foodRouter.get("/", getAllFoods);
 foodRouter.get("/:id", getFood);
-foodRouter.put("/:id", updateFood);
-foodRouter.delete("/:id", deleteFood);
+foodRouter.put("/:id", authAdmin, updateFood);
+foodRouter.delete("/:id", authAdmin, deleteFood);
 
 export default foodRouter;
